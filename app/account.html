@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covertlocker | account</title>
+
+    <link rel="stylesheet" href="../assets/styles/main.css" />
+    <link rel="stylesheet" href="../assets/styles/nav.css" />
+
+</head>
+
+<body>
+    <nav id="nav">
+        <div id="desktopNav" class="navInnerContentWrap">
+            <img class="navLogo" src="../assets/images/darth.png" alt="logo" />
+            <section class="navLinkWrap">
+                <a href="/create" class="navLink js-link"><span class="navSpan">CREATE</span></a>
+                <a href="/padlock" class="navLink js-link"><span class="navSpan">LOCKER</span></a>
+                <a href="#!" id="logoutBtn" class="navLink js-link"><span class="navSpan">LOGOUT</span></a>
+            </section>
+        </div>
+        <div id="mobileNav">
+            <img class="navLogo" src="../assets/images/darth.png" alt="logo" />
+            <a href="#!" class="menuIconWrap" onclick="openNav();">
+                <i class="menuIcon fas fa-bars"></i>
+            </a>
+        </div>
+    </nav>
+
+    <article class="pageRoot">
+        <h1>Account</h1>
+    </article>
+
+    <!-- ! FORM ALERT -->
+    <div id="formAlert" class="alert-success rounded wrapper">
+        <div id="alertIconWrap"></div>
+        <p id="alertText"></p>
+    </div>
+
+    <!-- jquery -->
+    <script type="text/javascript" src="../assets/lib/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="../assets/js/app.js"></script>
+    <script type="text/javascript" src="../assets/js/nav.js"></script>
+</body>
+
+</html>

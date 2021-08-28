@@ -1,0 +1,76 @@
+/* login wrapper */
+
+#loginWrap {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 30rem;
+    background-color: #580000;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .4);
+    display: block;
+    padding: 1rem 0;
+}
+
+/* register wrapper */
+
+#registerWrap {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 30rem;
+    background-color: #580000;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .4);
+    display: none;
+}
+
+/* form elements */
+
+.form {
+    padding: 1rem;
+}
+
+/* form titles */
+.formTitle {
+    font-size: 1.6rem;
+    color: white;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+/* input elements */
+
+.input {
+    width: 100%;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: .3rem;
+    display: block;
+    font-size: 1rem;
+    margin: 1.5rem 0;
+    outline: none;
+}
+
+/* text wrapper that contains the switch auth type text and button */
+.switchAuthTextWrap {
+    color: #ffffff;
+    font-size: .9rem;
+}
+
+/* button to click on and swtich the auth type */
+.switchAuthTypeBtn {
+    color: rgb(0, 140, 255);
+    font-weight: 500;
+    text-decoration: none;
+}

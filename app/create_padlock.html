@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covertlocker | Create Padlock</title>
+
+    <link rel="stylesheet" href="../assets/styles/main.css" />
+    <link rel="stylesheet" href="../assets/styles/nav.css" />
+    <link rel="stylesheet" href="../assets/styles/create_padlock.css" />
+</head>
+
+<body>
+    <nav id="nav">
+        <div id="desktopNav" class="navInnerContentWrap">
+            <img class="navLogo" src="../assets/images/darth.png" alt="logo" />
+            <section class="navLinkWrap">
+                <a href="/account" class="navLink js-link"><span class="navSpan">ACCOUNT</span></a>
+                <a href="/padlock" class="navLink js-link"><span class="navSpan">LOCKER</span></a>
+                <a href="#!" id="logoutBtn" class="navLink js-link"><span class="navSpan">LOGOUT</span></a>
+            </section>
+        </div>
+        <div id="mobileNav">
+            <img class="navLogo" src="../assets/images/darth.png" alt="logo" />
+            <a href="#!" class="menuIconWrap" onclick="openNav();">
+                <i class="menuIcon fas fa-bars"></i>
+            </a>
+        </div>
+    </nav>
+
+    <article class="pageRoot">
+        <section id="createFormWrap">
+            <form id="createForm">
+                <div class="inputWrap">
+                    <label class="label">Title *</label>
+                    <input id="title" placeholder="Title" name="title" class="input" />
+                </div>
+                <div class="inputWrap">
+                    <label class="label">Username *</label>
+                    <input id="username" placeholder="Username or email" name="username" class="input" />
+                </div>
+                <div class="inputWrap">
+                    <label class="label">Password *</label>
+                    <input id="password" placeholder="Password" name="password" class="input" />
+                </div>
+                <div class="inputWrap">
+                    <label class="label">Notes</label>
+                    <textarea id="notes" name="notes" id="" class="input" cols="30" rows="10"></textarea>
+                </div>
+                <main class="wrapper" style="justify-content: flex-end;">
+                    <button type="submit" class="btn">Submit</button>
+                </main>
+            </form>
+        </section>
+    </article>
+
+    <!-- ! FORM ALERT -->
+    <div id="formAlert" class="alert-success rounded wrapper">
+        <div id="alertIconWrap"></div>
+        <p id="alertText"></p>
+    </div>
+
+    <!-- jquery -->
+    <script type="text/javascript" src="../assets/lib/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="../assets/js/app.js"></script>
+    <script type="text/javascript" src="../assets/js/nav.js"></script>
+    <script type="text/javascript" src="../assets/js/create_padlock.js"></script>
+
+</body>
+
+</html>

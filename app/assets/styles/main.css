@@ -1,0 +1,49 @@
+html {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+.btn {
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: .3rem;
+    border: 1px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+/* root element for each page */
+
+.pageRoot {
+    margin-top: 4rem;
+}
+
+/* input elements */
+.input {
+    width: 100%;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: .3rem;
+    display: block;
+    font-size: 1rem;
+    margin: .5rem 0;
+    outline: none;
+}
+/* input wrapper surrounding the labels and inputs */
+
+.inputWrap {
+    width: 100%;
+    margin: 1.5rem 0;
+}

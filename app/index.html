@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coverlocker</title>
+
+    <link rel="stylesheet" href="../assets/styles/main.css" />
+    <link rel="stylesheet" href="../assets/styles/auth.css" />
+    <link rel="stylesheet" href="../assets/styles/alert.css" />
+
+</head>
+
+<body>
+    <article id="loginWrap">
+        <h1 class="formTitle">Login</h1>
+        <form id="loginForm" class="form">
+            <input id="loginEmail" name="email" placeholder="your@email.com" type="email" class="input" />
+            <input id="loginPassword" name="password" placeholder="Password1234" type="password" class="input" />
+            <main class="wrapper" style="justify-content: flex-end;">
+                <button type="submit" class="btn">Submit</button>
+            </main>
+        </form>
+        <main class="wrapper">
+            <p class="switchAuthTextWrap">Don't have an account yet? <a href="#!" id="switchToRegisterBtn"
+                    class="switchAuthTypeBtn">Register</a></p>
+        </main>
+    </article>
+
+    <article id="registerWrap">
+        <h1 class="formTitle">Register</h1>
+        <form id="registerForm" class="form">
+            <input id="registerName" placeholder="Your name" name="name" type="text" class="input" />
+            <input id="registerEmail" name="email" placeholder="your@email.com" type="email" class="input" />
+            <input id="registerPassword" name="password" placeholder="Password" type="password" class="input" />
+            <input id="registerPasswordCheck" name="passwordCheck" placeholder="Re-type password" type="password" class="input" />
+            <select id="registerQuestion" name="question" class="input">
+                <option selected>Select a security question</option>
+                <option value="What is the name of your first pet?">What is the name of your first pet?</option>
+                <option value="Where did you graduate highschool?">Where did you graduate highschool?</option>
+                <option value="Where did you meet your spouse?">Where did you meet your spouse?</option>
+                <option value="What is your mothers maiden name?">What is your mothers maiden name?</option>
+            </select>
+            <input id="registerAnswer" name="answer" placeholder="Security answer" type="text" class="input" />
+            <main class="wrapper" style="justify-content: flex-end;">
+                <button type="submit" class="btn">Submit</button>
+            </main>
+        </form>
+        <main class="wrapper">
+            <p class="switchAuthTextWrap">Already have an account? <a href="#!" id="switchToLoginBtn"
+                    class="switchAuthTypeBtn">Login</a></p>
+        </main>
+    </article>
+
+    <!-- ! FORM ALERT -->
+    <div id="formAlert" class="alert-success rounded wrapper">
+        <div id="alertIconWrap"></div>
+        <p id="alertText"></p>
+    </div>
+
+    <!-- jquery -->
+    <script type="text/javascript" src="../assets/lib/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="../assets/js/app.js"></script>
+    <script type="text/javascript" src="../assets/js/auth.js"></script>
+
+</body>
+
+</html>
