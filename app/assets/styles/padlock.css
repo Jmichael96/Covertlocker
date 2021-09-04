@@ -1,0 +1,238 @@
+/* root element for page  */
+
+.pageRoot {
+    display: none;
+    margin-top: 3rem;
+}
+
+/* padlock image */
+
+#lockImg {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 30rem;
+    display: none;
+}
+
+/* container for every card */
+
+#folderContainer {
+    width: 100%;
+    max-width: 35rem;
+    padding: 1rem;
+}
+
+/* container where padlocks are rendered */
+
+#padlockContainer {
+    width: 100%;
+    max-width: 35rem;
+    display: none;
+    /* margin-top: 2rem; */
+}
+
+/* empty message for if there are not padlocks saved in a folder */
+
+.emptyMsg {
+    text-align: center;
+    margin-top: 4rem;
+}
+
+/* folder card */
+
+.folderCard {
+    position: relative;
+    cursor: pointer;
+    padding: 1rem 2.5rem;
+    margin: 7rem 0;
+}
+
+/* delete folder button thats rendered on the top left of card */
+
+.deleteFolderBtn {
+    position: absolute;
+    top: -1.1rem;
+    left: -.9rem;
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 50%;
+    background-color: #00c3ff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .4);
+    cursor: pointer;
+}
+
+/* trash icon inside delete folder button */
+
+.folderTrashIcon {
+    font-size: 1.4rem;
+    color: black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+/* folder title for each card */
+
+.folderTitle {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+/* redirect button inside folder */
+
+.folderButton {
+    cursor: pointer;
+}
+
+/* date the folder was last updated */
+
+.lastUsedDate {
+    padding: 0;
+}
+
+/* padlock card */
+
+.padlockCard {
+    margin-top: 7rem;
+}
+
+/* header of the padlock card */
+
+.padlockHead {
+    background-color: #464646;
+    padding: 0 1rem;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .4);
+    margin-top: -3.5rem;
+}
+
+/* padlock title */
+
+.padlockTitle {
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+/* padlock date */
+
+.padlockLastUsedDate {
+    padding: 0;
+    color: rgb(187, 187, 187);
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+/* p tag containing username info */
+
+.padlockUsernameWrap {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+}
+
+/* p tag containing password info */
+
+.padlockPasswordWrap {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: white;
+}
+
+/* wrapper surrounding the input element and copy button */
+
+.padlockInputCopyWrap {
+    display: flex;
+}
+
+/* copy button  */
+
+.copyBtn {
+    border: 1px solid black;
+    background-color: black;
+    color: #00c3ff;
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* input elements with the dynamic saved data */
+
+.padlockInput {
+    display: block;
+    font-size: 1.1rem;
+    width: 100%;
+    border: 1px solid white;
+    background-color: white;
+    color: black;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+    padding: .3rem;
+    height: 2rem
+}
+
+/* textarea element that displays the notes */
+
+.padlockNotes {
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid white;
+    background-color: white;
+    color: black;
+    margin: 1rem 0;
+}
+
+/* icon wrapper thats around each trashcan and edit icon */
+
+.padlockIconWrap {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background-color: black;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .4);
+    margin: 1rem;
+}
+
+/* action icons for each padlock */
+
+.padlockIcon {
+    font-size: 1.2rem;
+    color: white;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+/*! modal data */
+
+/* question for the modal */
+
+#question {
+    color: white;
+    font-size: 1rem;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}

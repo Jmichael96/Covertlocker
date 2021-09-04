@@ -21,6 +21,17 @@ const PadlockSchema = new mongoose.Schema({
     notes: {
         type: String,
         required: false
+    },
+    folder: {
+        type: String,
+        required: true
+    },
+    updatedAt: {
+        type: Date
+    },
+    date: {
+        type: Date,
+        default: new Date
     }
 });
 

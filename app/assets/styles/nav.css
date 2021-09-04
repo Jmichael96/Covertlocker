@@ -1,7 +1,7 @@
 #nav {
     height: 4rem;
     width: 100%;
-    background-color: #a70000;
+    background-color: #004b6e;
     position: fixed;
     display: flex;
     align-items: center;
@@ -52,7 +52,7 @@
     -webkit-transition: all .5s ease-out;
     -moz-transition: all .5s ease-out;
     transition: all .5s ease-out;
-    color: #000000;
+    color: #ffffff;
 }
 
 .navSpan {
@@ -73,7 +73,7 @@
     height: 2px;
     left: 50%;
     position: absolute;
-    background: #47ff2f;
+    background: #00c3ff;
     transition: width 0.3s ease 0s, left 0.3s ease 0s;
     width: 0;
 }

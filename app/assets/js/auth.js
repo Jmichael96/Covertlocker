@@ -26,9 +26,9 @@ document.getElementById('loginForm').onsubmit = async (e) => {
         password
     };
 
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('x-auth-token', localStorage.token);
+    // let headers = new Headers();
+    // headers.append('Content-Type', 'application/json');
+    // headers.append('x-auth-token', localStorage.token);
 
     await fetch(`/api/auth/login`, {
         method: 'POST',
@@ -73,9 +73,9 @@ document.getElementById('registerForm').onsubmit = async (e) => {
         answer
     };
 
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('x-auth-token', localStorage.token);
+    // let headers = new Headers();
+    // headers.append('Content-Type', 'application/json');
+    // headers.append('x-auth-token', localStorage.token);
 
     await fetch(`/api/auth/register`, {
         method: 'POST',

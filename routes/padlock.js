@@ -7,4 +7,9 @@ const PadlockController = require('../controllers/padlock');
 //! @access   Private
 router.post('/create', checkAuth, PadlockController.createPadlock);
 
+//! @route    GET api/padlock/fetch
+//! @desc     Fetch the padlocks
+//! @access   Private
+router.get('/fetch', checkAuth, PadlockController.fetchPadlocks);
+
 module.exports = router;

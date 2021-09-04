@@ -1,7 +1,7 @@
 /* ! NEW ALERT  */
 
 .alert-success {
-    background-color: #500192;
+    background-color: #00c3ff;
     position: fixed;
     width: 80%;
     max-width: 40rem;
@@ -18,22 +18,22 @@
     overflow: hidden;
     display: none;
     /* webkit animation */
-    -webkit-animation-duration: 4s;
+    -webkit-animation-duration: 3s;
     -webkit-animation-iteration-count: 1;
     -webkit-animation-fill-mode: both;
     -webkit-animation-name: alert-in;
     /* moz animation */
-    -moz-animation-duration: 4s;
+    -moz-animation-duration: 3s;
     -moz-animation-iteration-count: 1;
     -moz-animation-fill-mode: both;
     -moz-animation-name: alert-in;
     /* ms animation */
-    -ms-animation-duration: 4s;
+    -ms-animation-duration: 3s;
     -ms-animation-iteration-count: 1;
     -ms-animation-fill-mode: both;
     -ms-animation-name: alert-in;
     /* animation */
-    animation-duration: 4s;
+    animation-duration: 3s;
     animation-iteration-count: 1;
     animation-fill-mode: both;
     animation-name: alert-in;
@@ -45,7 +45,7 @@
 
 #alertText {
     width: 100%;
-    color: white;
+    color: #000000;
     font-size: 1.2rem;
     text-align: center;
     margin: -.6rem 0 0 0;
@@ -59,9 +59,9 @@
     position: absolute;
     top: -1px;
     left: -1px;
-    border: 1px solid #47ff2f;
+    border: 1px solid #464646;
     border-radius: 3px;
-    background: #47ff2f;
+    background: #464646;
 }
 
 /* arrow tic */
@@ -77,7 +77,7 @@
     top: 50%;
     right: -2px;
     z-index: 99;
-    background: #47ff2f;
+    background: #464646;
     margin-top: -6px;
     -webkit-transform: rotate(45deg) translateY(-50%);
     -moz-transform: rotate(45deg) translateY(-50%);
@@ -88,7 +88,7 @@
 
 #alertIconWrap i {
     font-size: 2rem;
-    color: rgb(0, 0, 0);
+    color: #00c3ff;
     position: absolute;
     z-index: 100;
     left: 66%;

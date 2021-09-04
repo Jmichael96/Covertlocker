@@ -13,4 +13,8 @@ router.get('/create', (req, res, next) => {
     res.sendFile(path.join(__dirname, '../app/create_padlock.html'));
 });
 
+router.get('/padlock', (req, res, next) => {
+    res.sendFile(path.join(__dirname, '../app/padlock.html'));
+});
+
 module.exports = router;

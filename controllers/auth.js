@@ -97,7 +97,7 @@ exports.login = async (req, res, next) => {
                 if (err) throw err;
 
                 return res.status(201).json({
-                    serverMsg: `Herrow, ${fetchedUser.name}`,
+                    serverMsg: `Howdy, ${fetchedUser.name}`,
                     token
                 });
             });
@@ -116,6 +116,7 @@ exports.loadUser = (req, res, next) => {
         .then((user) => {
             if (!user) {
                 return res.status(404).json({
+                    status: 404,
                     serverMsg: 'There is no user authorized'
                 });
             }
@@ -133,7 +134,7 @@ exports.loadUser = (req, res, next) => {
 //! @access   Private
 exports.logout = (req, res, next) => {
     User.findById({ _id: req.user._id })
-        .then((user) => {
+        .then(async (user) => {
             // if a user doesnt exist
             if (!user) {
                 return res.status(404).json({
