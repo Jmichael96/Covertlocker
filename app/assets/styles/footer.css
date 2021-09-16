@@ -1,0 +1,49 @@
+footer {
+    width: 100%;
+    padding: .1rem .5rem;
+}
+
+.fixed-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+/* copyright footer text */
+
+#copyrightTextWrap {
+    color: white;
+    text-align: center;
+    padding: 0;
+    margin: .5rem 0;
+    font-size: .8rem;
+}
+
+/* built with text wrapper */
+
+#buildByTextWrap {
+    padding: 0;
+    margin: .5rem 0;
+    color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .8rem;
+}
+
+/* coffee icon */
+
+.fa-coffee {
+    color: #00c3ff;
+    margin: 0 .4rem
+}
+
+/* footer name that ties to codevh.com */
+
+#footerName {
+    text-decoration: none;
+    color: #00c3ff;
+    margin-left: .3rem;
+    font-weight: 600;
+}

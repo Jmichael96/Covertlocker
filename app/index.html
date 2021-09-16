@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../assets/styles/main.css" />
     <link rel="stylesheet" href="../assets/styles/auth.css" />
     <link rel="stylesheet" href="../assets/styles/alert.css" />
+    <link rel="stylesheet" href="../assets/styles/modal.css" />
 
 </head>
 
@@ -27,6 +28,9 @@
             <p class="switchAuthTextWrap">Don't have an account yet? <a href="#!" id="switchToRegisterBtn"
                     class="switchAuthTypeBtn">Register</a></p>
         </main>
+        <main class="wrapper">
+            <a id="forgotPassBtn" href="#!">Forgot password?</a>
+        </main>
     </article>
 
     <article id="registerWrap">
@@ -35,7 +39,8 @@
             <input id="registerName" placeholder="Your name" name="name" type="text" class="input" />
             <input id="registerEmail" name="email" placeholder="your@email.com" type="email" class="input" />
             <input id="registerPassword" name="password" placeholder="Password" type="password" class="input" />
-            <input id="registerPasswordCheck" name="passwordCheck" placeholder="Re-type password" type="password" class="input" />
+            <input id="registerPasswordCheck" name="passwordCheck" placeholder="Re-type password" type="password"
+                class="input" />
             <select id="registerQuestion" name="question" class="input">
                 <option selected>Select a security question</option>
                 <option value="What is the name of your first pet?">What is the name of your first pet?</option>
@@ -54,6 +59,20 @@
         </main>
     </article>
 
+    <!-- ! MODAL  -->
+    <div class="overlay" id="overlay"></div>
+    <div class="modal" id="modal">
+        <!-- <button class="modal-close-btn" id="close-btn"><i class="fa fa-times" title="閉じる"></i></button> -->
+        <p id="modalText">Enter your email address</p>
+        <main class="wrapper" style="margin: 1rem 0;">
+            <input placeholder="your@email.com" name="forgotPassEmail" type="email" class="input" id="forgotPassEmail" />
+        </main>
+        <main class="wrapper" style="justify-content: space-between;">
+            <button id="cancelConfirmBtn" class="btn" type="button">Cancel</button>
+            <button id="submitForgotPassword" class="btn" type="button">SUBMIT</button>
+        </main>
+    </div>
+
     <!-- ! FORM ALERT -->
     <div id="formAlert" class="alert-success rounded wrapper">
         <div id="alertIconWrap"></div>
@@ -62,6 +81,8 @@
 
     <!-- jquery -->
     <script type="text/javascript" src="../assets/lib/jquery-3.5.1.min.js"></script>
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/ff480394be.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="../assets/js/app.js"></script>
     <script type="text/javascript" src="../assets/js/auth.js"></script>
 

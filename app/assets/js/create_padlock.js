@@ -51,6 +51,7 @@ const fetchFolders = async () => {
         .then(async (data) => {
             if (data.status === 404) {
                 document.getElementById('folder').innerHTML = '<option selected value="">Select a folder</option>'
+                removeLoader();
                 return;
             }
             folderArr = data;
@@ -92,7 +93,7 @@ const createFolder = async (defaultFolderName) => {
             await closeModal();
         }).catch(async (err) => {
             await renderAlert(err.serverMsg, true);
-        })
+        });
 };
 
 // when the user submits the form to create a folder

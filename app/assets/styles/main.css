@@ -20,8 +20,17 @@ html {
     border-radius: 5px;
     cursor: pointer;
     background-color: #464646;
-    color: #00c3ff;
+    color: white;
     box-shadow: 0 4px 12px rgba(0, 0, 0, .3);
+    -webkit-transition: .4s all ease;
+    -moz-transition: .4s all ease;
+    -o-transition: .4s all ease;
+    ;
+    transition: .4s all ease;
+}
+
+.btn:hover {
+    color: #00c3ff;
 }
 
 .wrapper {
@@ -42,12 +51,14 @@ html {
 
 .input {
     width: 100%;
+    background-color: white;
     border: 1px solid white;
     border-radius: 5px;
     padding: .3rem;
     display: block;
     font-size: 1rem;
     margin: .5rem 0;
+    color: black;
     outline: none;
 }
 
@@ -86,5 +97,26 @@ html {
     border: 1px solid black;
 }
 
-/* ! modals */
+/* ! BASIC STYLES */
 
+.small-shadow {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .2);
+}
+
+.large-shadow {
+    box-shadow: 0 5px 12px rgba(0, 0, 0, .3);
+}
+
+.dark-blue {
+    background-color: #004b6e;
+}
+
+.light-blue {
+    background-color: #00c3ff;
+}
+
+.grey {
+    background-color: #464646;
+}
+
+/* ! modals */

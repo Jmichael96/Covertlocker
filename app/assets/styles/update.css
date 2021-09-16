@@ -1,0 +1,17 @@
+
+/* update form element */
+.updateForm {
+    position: fixed;
+    width: 100%;
+    max-width: 35rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .3);
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    background: #004b6e;
+    padding: 1rem;
+    border-radius: 6px;
+}

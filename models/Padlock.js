@@ -29,9 +29,8 @@ const PadlockSchema = new mongoose.Schema({
     updatedAt: {
         type: Date
     },
-    date: {
+    createdAt: {
         type: Date,
-        default: new Date
     }
 });
 

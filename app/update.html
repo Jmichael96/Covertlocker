@@ -5,15 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Covertlocker | Padlock</title>
+    <title>Covertlocker | Update</title>
 
     <link rel="stylesheet" href="../assets/styles/main.css" />
     <link rel="stylesheet" href="../assets/styles/loader.css" />
     <link rel="stylesheet" href="../assets/styles/nav.css" />
-    <link rel="stylesheet" href="../assets/styles/padlock.css" />
     <link rel="stylesheet" href="../assets/styles/modal.css" />
     <link rel="stylesheet" href="../assets/styles/alert.css" />
-    <link rel="stylesheet" href="../assets/styles/confirmModal.css" />
+    <link rel="stylesheet" href="../assets/styles/update.css" />
 
 </head>
 
@@ -23,7 +22,8 @@
             <img class="navLogo" src="../assets/images/undercover.jpeg" alt="logo" />
             <section class="navLinkWrap">
                 <a href="/account" class="navLink js-link"><span class="navSpan">ACCOUNT</span></a>
-                <a href="/create" class="navLink js-link"><span class="navSpan">CREATE</span></a>
+                <a href="/create" class="navLink js-link"><span class="navSpan">CREATE</span></a> 
+                <a href="/padlock" class="navLink js-link"><span class="navSpan">LOCKER</span></a> 
                 <a href="#!" id="logoutBtn" class="navLink js-link"><span class="navSpan">LOGOUT</span></a>
             </section>
         </div>
@@ -35,53 +35,9 @@
         </div>
     </nav>
 
-    <img id="lockImg" src="../assets/images/lock.png" alt="" />
-
-    <article id="padlockRoot" class="pageRoot">
-        <main id="filterWrapper" class="wrapper" style="margin-top: 8rem;">
-            <div id="padlockFilterBar" class="dark-blue large-shadow">
-                <main class="wrapper" style="justify-content: space-between;">
-                    <input type="text" name="filterName" id="filterInput" placeholder="Search" />
-                    <select name="orderBy" id="orderBy">
-                        <option value="" selected>Order By</option>
-                        <option value="1">Date Created (Recent - Oldest)</option>
-                        <option value="2">Date Created (Oldest - Recent)</option>
-                    </select>
-                </main>
-            </div>
-        </main>
-        <main class="wrapper" style="justify-content: space-evenly;">
-            <div id="folderContainer">
-
-            </div>
-            <div id="padlockContainer">
-
-            </div>
-        </main>
+    <article id="updateRoot" class="pageRoot">
+       
     </article>
-
-    <!-- ! MODAL  -->
-    <div class="overlay" id="overlay"></div>
-    <div class="modal" id="modal">
-        <!-- <button class="modal-close-btn" id="close-btn"><i class="fa fa-times" title="閉じる"></i></button> -->
-        <p id="question"></p>
-        <main class="wrapper" style="margin: 1rem 0;">
-            <input placeholder="Your Answer" name="answer" class="input" id="answer" />
-        </main>
-        <main class="wrapper" style="justify-content: space-between;">
-            <button id="cancelConfirmBtn" class="btn" type="button">Cancel</button>
-            <button id="submitAnswerBtn" class="btn" type="button">SUBMIT</button>
-        </main>
-    </div>
-    <!-- ! CONFIRM MODAL  -->
-    <!-- <div class="overlay" id="overlay"></div> -->
-    <div class="confirmModal" id="confirmModal">
-        <p id="confirmModalMsg"></p>
-        <main class="wrapper" style="justify-content: space-between;">
-            <button id="declineBtn" class="btn" type="button">No</button>
-            <button id="confirmBtn" class="btn" type="button">Yes</button>
-        </main>
-    </div>
 
     <!-- ! FORM ALERT -->
     <div id="formAlert" class="alert-success rounded wrapper">
@@ -117,7 +73,7 @@
     <script src="https://kit.fontawesome.com/ff480394be.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="../assets/js/app.js"></script>
     <script type="text/javascript" src="../assets/js/nav.js"></script>
-    <script type="text/javascript" src="../assets/js/padlock.js"></script>
+    <script type="text/javascript" src="../assets/js/update.js"></script>
 
 </body>
 

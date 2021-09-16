@@ -25,7 +25,9 @@ exports.createFolder = async (req, res, next) => {
 
     const newFolder = new Folder({
         userId: req.user._id,
-        folderName: req.body.folderName
+        folderName: req.body.folderName,
+        createdAt: new Date(),
+        updatedAt: new Date()
     });
 
     await newFolder.save().then(async (folder) => {
@@ -49,10 +51,9 @@ exports.fetchFolders = async (req, res, next) => {
         if (isEmpty(folders)) {
             return res.status(404).json({
                 status: 404,
-                // serverMsg: 'You don\'t have any folders created'
             });
         }
-        res.status(200).json(folders);
+        return res.status(200).json(folders);
     }).catch((err) => {
         res.status(500).json({
             serverMsg: 'There was a problem completing your request. Please try again later'
@@ -64,7 +65,7 @@ exports.fetchFolders = async (req, res, next) => {
 //! @desc     Delete a folder
 //! @access   Private
 exports.deleteFolder = async (req, res, next) => {
-    await Folder.findOneAndDelete({ folderName: req.params.folderName })
+    await Folder.findOneAndDelete({ folderName: req.params.folderName, userId: req.user._id })
     .then(async (deletedFolder) => {
             let padlockIdArr = [];
             let parsedPadlocks = JSON.parse(req.query.padlocks);

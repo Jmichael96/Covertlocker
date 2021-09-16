@@ -4,22 +4,78 @@ headers.append('Content-Type', 'application/json');
 headers.append('x-auth-token', localStorage.token);
 
 window.addEventListener('load', async () => {
+
     await fetch(`/api/auth/load_user`, {
         method: 'GET',
         headers: headers
     }).then((res) => res.json())
         .then((data) => {
             if (data.status === 401 || data.status === 404) {
-                if (window.location.pathname !== '/') {
-                    window.location.href = '/';
-                }
+                // if (window.location.pathname !== '/') {
+                //     window.location.href = '/';
+                // }
+                foundUser = null;
                 return;
             }
             foundUser = data;
+            console.log(foundUser);
         }).catch((err) => {
             window.location.href = '/';
             console.log(err);
         });
+
+    switch (window.location.pathname) {
+        case '/':
+            // when the user hits the cancel button in the modal
+            document.getElementById('cancelConfirmBtn').addEventListener('click', () => {
+                closeModal();
+            });
+            break;
+        case '/padlock':
+            privateRoute(foundUser)
+            // logout button
+            document.getElementById('logoutBtn').onclick = async () => {
+                await handleLogout();
+            };
+            // when the user clicks the decline button in the confirm modal
+            document.getElementById('declineBtn').addEventListener('click', () => {
+                closeConfirmModal();
+            })
+            // when the user hits the cancel button in the modal
+            document.getElementById('cancelConfirmBtn').addEventListener('click', () => {
+                closeModal();
+            });
+            break;
+        case '/create':
+            privateRoute(foundUser)
+            // when the user hits the cancel button in the modal
+            document.getElementById('cancelConfirmBtn').addEventListener('click', () => {
+                closeModal();
+            });
+            // logout button
+            document.getElementById('logoutBtn').onclick = async () => {
+                await handleLogout();
+            };
+            break;
+        case '/account':
+            privateRoute(foundUser)
+            let loginRoute = "/" + /[^/]*$/.exec(document.referrer)[0];
+            if (loginRoute === '/') {
+                renderAlert(`Howdy, ${foundUser.name}`, false);
+            }
+            // logout button
+            document.getElementById('logoutBtn').onclick = async () => {
+                await handleLogout();
+            };
+            break;
+        case '/reset_password':
+
+            break;
+        case '/password':
+            privateRoute(foundUser)
+            break;
+        default: return;
+    }
 });
 
 let timer, currSeconds = 0;
@@ -77,30 +133,8 @@ const renderAlert = async (msg, isErr) => {
     }, 5000);
 };
 
-// for every location except the home page
-if (window.location.pathname !== '/') {
-    // logout button
-    document.getElementById('logoutBtn').onclick = async () => {
-        await handleLogout();
-    };
-    // when the user hits the cancel button in the modal
-    document.getElementById('cancelConfirmBtn').addEventListener('click', () => {
-        closeModal();
-    });
-}
-// for the account and locker route
-if (window.location.pathname === '/padlock') {
-    // when the user clicks the decline button in the confirm modal
-    document.getElementById('declineBtn').addEventListener('click', () => {
-        closeConfirmModal();
-    })
-}
-
 // logout function
 const handleLogout = async () => {
-    // let headers = new Headers();
-    // headers.append('Content-Type', 'application/json');
-    // headers.append('x-auth-token', localStorage.token);
     await fetch(`/api/auth/logout`, {
         method: 'PUT',
         headers: headers
@@ -113,16 +147,6 @@ const handleLogout = async () => {
             console.log(err);
         });
 }
-
-// x button to close the modal
-// document.getElementById('close-btn').addEventListener('click', function () {
-//     closeModal();
-// });
-
-// overlay behind the modal to tap anywhere to close
-// document.getElementById('overlay').addEventListener('click', function () {
-//     closeModal();
-// });
 
 // open modal function
 const openModal = (question) => {
@@ -164,4 +188,11 @@ const openConfirmModal = (msg) => {
 const closeConfirmModal = () => {
     document.getElementById('overlay').classList.remove('is-visible');
     document.getElementById('confirmModal').classList.remove('is-visible');
+};
+
+// handle the redirect for private routes
+const privateRoute = (user) => {
+    if (!user) {
+        window.location.href = '/';
+    }
 };

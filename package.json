@@ -18,8 +18,10 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "@vonage/server-sdk": "^2.10.10",
     "cors": "^2.8.5",
     "cryptr": "^6.0.2",
+    "nodemailer": "^6.6.3",
     "nodemon": "^2.0.12"
   }
 }

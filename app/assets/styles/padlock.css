@@ -20,6 +20,49 @@
     display: none;
 }
 
+/* ! filter bar styles ========= */
+
+/* filter bar wrapper */
+
+#filterWrapper {
+    display: none;
+}
+
+/* filter bar */
+
+#padlockFilterBar {
+    padding: 1rem;
+    border-radius: 6px;
+    width: 100%;
+    max-width: 50rem;
+}
+
+/* filter input element  */
+
+#filterInput {
+    padding: .3rem;
+    width: 100%;
+    max-width: 16rem;
+    border-radius: 6px;
+    border: 1px solid white;
+    outline: none;
+    font-size: 1rem;
+}
+
+/* order by select element */
+
+#orderBy {
+    padding: .3rem;
+    width: 100%;
+    max-width: 10rem;
+    border-radius: 6px;
+    border: 1px solid white;
+    outline: none;
+    font-size: 1rem;
+}
+
+/* ! END ============ */
+
 /* container for every card */
 
 #folderContainer {

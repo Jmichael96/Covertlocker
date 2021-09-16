@@ -2,16 +2,23 @@ let fetchedPadlocks = false;
 let fetchedFolders = false;
 let fetchedPadlockArr = [];
 let fetchedFolderArr = [];
+let copyPadlockArr = [];
+let filteredPadlockArr;
+let deleteType = '';
 const folderContainer = document.getElementById('folderContainer');
 const padlockContainer = document.getElementById('padlockContainer');
+const filterBarWrapper = document.getElementById('filterWrapper');
+const filterInput = document.getElementById('filterInput');
+const orderByInput = document.getElementById('orderBy');
 // variable to set the folder name to when user wants to delete
 let selectedFolderForDeletion = '';
+// variable to set the padlock id to when user wants to delete
+let currentSelectedPadlock = '';
+// saves what folder directory the user is in
+let folderDir = '';
+// set the isEditing variable truthy or falsy when the user answers security question
+let isEditing = false;
 
-window.addEventListener('load', () => {
-    if (!localStorage.getItem('hasAnsweredSecurityQuestion')) {
-        document.getElementById('lockImg').style.display = 'block';
-    }
-});
 
 const fetchFolders = async () => {
     renderLoader();
@@ -41,7 +48,7 @@ const fetchPadlocks = async () => {
         .then((data) => {
             fetchedPadlocks = true;
             if (data.status === 404) {
-                document.getElementById('folderContainer').style.display = 'none';
+                removeLoader()
                 return;
             }
             removeLoader();
@@ -56,13 +63,20 @@ function setReadyListener() {
     const readyListener = async () => {
         if (foundUser) {
             if (!localStorage.getItem('hasAnsweredSecurityQuestion') && foundUser.security.question !== localStorage.getItem('securityQuestion')) {
+                localStorage.setItem('hasAnsweredSecurityQuestion', false);
                 openModal(foundUser.security.question);
                 return;
+            } else if (localStorage.getItem('hasAnsweredSecurityQuestion') && foundUser.security.question !== localStorage.getItem('securityQuestion')) {
+                localStorage.setItem('hasAnsweredSecurityQuestion', false);
+                openModal(foundUser.security.question);
+                return;
+            } else if (foundUser.email !== localStorage.getItem('email')) {
+                localStorage.setItem('hasAnsweredSecurityQuestion', false);
+                openModal(foundUser.security.question);
             }
             await fetchFolders();
             await fetchPadlocks();
             document.getElementById('lockImg').style.display = 'none';
-            document.getElementById('padlockRoot').style.display = 'block';
             return;
         }
         return setTimeout(readyListener, 250);
@@ -73,8 +87,8 @@ function setReadyListener() {
 // set the ready listener to watch if user has fetched both padlocks and folders
 const readyListenerForData = () => {
     const readyListener = async () => {
-        // console.log(fetchedPadlocks, fetchedFolders)
-        if (fetchedPadlocks && fetchedFolders) {
+        if (fetchedFolders && fetchedPadlocks) {
+            document.getElementById('padlockRoot').style.display = 'block';
             await renderFolders();
             return;
         }
@@ -87,54 +101,78 @@ const readyListenerForData = () => {
 // on submit question button
 document.getElementById('submitAnswerBtn').onclick = async (e) => {
     e.preventDefault();
-    renderLoader();
+    // renderLoader();
     let answer = $('#answer').val();
-
-    await fetch(`/api/padlock/fetch?` + new URLSearchParams({
+    let formData = {
         answer: answer,
         question: foundUser.security.question
-    }), {
-        method: 'GET',
-        headers: headers,
-    }).then((res) => res.json())
-        .then(async (data) => {
-            console.log(data);
-            if (data.status === 401) {
-                console.log('rendering error')
-                await renderAlert(data.serverMsg, true);
-                return;
-            }
-            if (data.status === 200) {
-                await closeModal();
+    };
+    if (!isEditing) {
+        renderLoader();
+        await fetch(`/api/auth/check_security`, {
+            method: 'PUT',
+            headers: headers,
+            body: JSON.stringify(formData)
+        }).then((res) => res.json())
+            .then(async (data) => {
+                if (data.status === 401) {
+                    await renderAlert(data.serverMsg, true);
+                    return;
+                }
+                removeLoader();
                 localStorage.setItem('hasAnsweredSecurityQuestion', true);
+                localStorage.setItem('securityQuestion', foundUser.security.question);
+                localStorage.setItem('email', foundUser.email)
+                closeModal();
                 await fetchFolders();
                 await fetchPadlocks();
-                removeLoader();
-            }
-        }).catch(async (err) => {
-            await renderAlert(err.serverMsg, true);
-        });
+                document.getElementById('lockImg').style.display = 'none';
+                document.getElementById('padlockRoot').style.display = 'block';
+            }).catch(async (err) => {
+                console.log(err);
+                await renderAlert(err.serverMsg, true);
+            });
+    } else if (isEditing) {
+        await fetch(`/api/auth/check_security`, {
+            method: 'PUT',
+            headers: headers,
+            body: JSON.stringify(formData)
+        }).then((res) => res.json())
+            .then(async (data) => {
+                if (data.status === 401) {
+                    await renderAlert(data.serverMsg, true);
+                    return;
+                }
+                await closeModal();
+                redirectToEditPage(currentSelectedPadlock, 'padlock');
+            }).catch(async (err) => {
+                console.log(err);
+                await renderAlert(err.serverMsg, true);
+            });
+    }
 };
 
 // when folder button is clicked render the padlocks
 const renderPadlocks = async (folderName) => {
     folderContainer.style.display = 'none';
     padlockContainer.style.display = 'block';
+    filterBarWrapper.style.display = 'flex';
 
-    let filteredArr = fetchedPadlockArr.filter(({ folder }) => folder === folderName);
-    console.log(filteredArr)
-    if (filteredArr.length <= 0) {
+    if (folderName) {
+        filteredPadlockArr = fetchedPadlockArr.filter(({ folder }) => folder === folderName);
+    }
+
+    if (filteredPadlockArr.length <= 0) {
         renderAlert('You don\'t have any padlocks saved in this folder', true);
-        // padlockContainer.innerHTML = `<h2 class="emptyMsg">Looks like you don't have any padlocks saved in this folder!</h2>`
         return;
     }
-    padlockContainer.innerHTML = `${Object.values(filteredArr).map((padlock) => {
+    padlockContainer.innerHTML = `${Object.values(copyPadlockArr.length <= 0 ? filteredPadlockArr : copyPadlockArr).map((padlock) => {
         return `
                 <div class="padlockCard card">
                     <div class="padlockHead">
                         <main class="wrapper" style="justify-content: space-between;">
-                            <h2 class="padlockTitle">${padlock.title}</h2>
-                            <p class="padlockLastUsedDate">${moment(padlock.updatedAt).format('L LT')}</p>
+                        <h2 class="padlockTitle">${padlock.title}</h2>
+                        <p class="padlockLastUsedDate">${padlock.updatedAt ? moment(padlock.updatedAt).format('L LT') : moment(padlock.createdAt).format('L LT')}</p>
                         </main>
                     </div>
                     <p class="padlockUsernameWrap">Username: 
@@ -152,10 +190,10 @@ const renderPadlocks = async (folderName) => {
 
                     <textarea rows="4" disabled value="${padlock.notes}" class="padlockNotes">${padlock.notes}</textarea>
                     <main class="wrapper" style="justify-content: space-between">
-                        <div class="padlockIconWrap">
+                        <div value="${padlock._id}" class="padlockIconWrap padlockDeleteWrap">
                             <i class="fas fa-trash padlockIcon"></i>
                         </div>
-                        <div class="padlockIconWrap">
+                        <div value="${padlock._id}" class="padlockIconWrap padlockUpdateWrap">
                             <i class="fas fa-keyboard padlockIcon"></i>
                         </div>
                     </main>    
@@ -163,7 +201,7 @@ const renderPadlocks = async (folderName) => {
             `
     }).join('')
         }`
-
+    // when user hits the copy button for the specified inputs
     document.querySelectorAll('.copyBtn').forEach((el) => {
         el.addEventListener('click', function (e) {
             e.preventDefault();
@@ -176,6 +214,37 @@ const renderPadlocks = async (folderName) => {
             renderAlert('Copied to your clipboard!', false);
         });
     });
+    // when user hits delete button on padlock
+    document.querySelectorAll('.padlockDeleteWrap').forEach((el) => {
+        el.addEventListener('click', function (e) {
+            e.preventDefault();
+            deleteType = 'padlock';
+            let padlockId = $(e.target).parent().attr('value');
+
+            if (typeof padlockId === 'undefined') {
+                currentSelectedPadlock = $(e.target).attr('value');
+            } else {
+                currentSelectedPadlock = $(e.target).parent().attr('value');
+            }
+            openConfirmModal('Are you sure? This cannot be undone.');
+        });
+    });
+    // when user hits the edit button on the padlock
+    document.querySelectorAll('.padlockUpdateWrap').forEach((el) => {
+        el.addEventListener('click', function (e) {
+            e.preventDefault();
+            isEditing = true;
+            openModal(foundUser.security.question);
+            // need to ask for security question before allowing edit and viewing password
+            let padlockId = $(e.target).parent().attr('value');
+
+            if (typeof padlockId === 'undefined') {
+                currentSelectedPadlock = $(e.target).attr('value');
+            } else {
+                currentSelectedPadlock = $(e.target).parent().attr('value');
+            }
+        });
+    });
 };
 
 const renderFolders = async () => {
@@ -185,7 +254,7 @@ const renderFolders = async () => {
                 <div value="delete" name="${f.folderName}" class="deleteFolderBtn"><i class="fas fa-trash folderTrashIcon"></i></div>
                 <main value="null" name="${f.folderName}" class="wrapper" style="justify-content: space-between;">    
                     <h2 class="folderTitle">${f.folderName}</h2>
-                    <p class="lastUsedDate">${moment(f.updatedAt).format('DD/MM/YYYY')}</p>
+                    <p class="lastUsedDate">${f.updatedAt ? moment(f.updatedAt).format('DD/MM/YYYY') : moment(f.createdAt).format('DD/MM/YYYY')}</p>
                 </main>
             </div>
             `
@@ -199,22 +268,25 @@ const renderFolders = async () => {
 
             // if value attribute is delete then we render the confirm delete modal
             if ($(e.target).parent().attr('value') === 'delete' || $(e.target).attr('value') === 'delete') {
+                deleteType = 'folder';
                 openConfirmModal('Are you sure? Deleting this will delete all padlocks contained in this folder.');
                 let selectedFolder = $(e.target).parent().attr('name');
                 if (typeof selectedFolder === 'undefined') {
-                    selectedFolderForDeletion = $(e.target).attr('name')
+                    selectedFolderForDeletion = $(e.target).attr('name');
                 } else {
                     selectedFolderForDeletion = selectedFolder;
                 }
                 return;
             }
-            
+
             if ($(e.target).parent().attr('value') === 'null' || $(e.target).attr('value') === 'null') {
                 // if the element doesn't have a parent then get the name attribute from the parent
                 if (typeof folderName === 'undefined') {
                     renderPadlocks($(e.target).attr('name'));
+                    folderDir = $(e.target).attr('name');
                 } else {
                     renderPadlocks($(e.target).parent().attr('name'));
+                    folderDir = $(e.target).parent().attr('name');
                 }
             }
         });
@@ -223,7 +295,14 @@ const renderFolders = async () => {
 
 document.getElementById('confirmBtn').addEventListener('click', (e) => {
     e.preventDefault();
-    deleteFolder(selectedFolderForDeletion);
+    switch (deleteType) {
+        case 'folder':
+            deleteFolder(selectedFolderForDeletion);
+            break;
+        case 'padlock':
+            deletePadlock(currentSelectedPadlock);
+        default: return;
+    }
 });
 
 const deleteFolder = async (folderName) => {
@@ -248,5 +327,60 @@ const deleteFolder = async (folderName) => {
             throw err;
         });
 };
+
+const deletePadlock = async (padlockId) => {
+    await fetch(`/api/padlock/delete/${padlockId}`, {
+        method: 'DELETE',
+        headers: headers
+    }).then((res) => res.json())
+        .then(async (data) => {
+            if (data.status === 404) {
+                renderAlert(data.serverMsg, true);
+                return;
+            }
+            fetchedPadlockArr = fetchedPadlockArr.filter((a) => a._id !== padlockId);
+            console.log(fetchedPadlockArr);
+            await renderAlert(data.serverMsg, false);
+            closeConfirmModal();
+            await renderPadlocks(folderDir);
+        }).catch((err) => {
+            renderAlert(err.serverMsg, true);
+            throw err;
+        });
+};
+
+const redirectToEditPage = (id, type) => {
+    window.location.href = `/update?data=${id}&type=${type}`;
+};
+
 setReadyListener();
 readyListenerForData();
+
+filterInput.addEventListener('keyup', async function (e) {
+    // repopulate copyPadlockArr with the already filtered padlock array
+    copyPadlockArr = filteredPadlockArr;
+    // then filter copy array with the newly added search params
+    copyPadlockArr = copyPadlockArr.filter((a) => JSON.stringify(a.title.toLowerCase()).includes(this.value.toLowerCase()));
+    // last render the padocks
+    await renderPadlocks();
+});
+
+orderByInput.addEventListener('change', async function (e) {
+    if (this.value) {
+        switch (this.value) {
+            case '1':
+                copyPadlockArr.length <= 0 && filteredPadlockArr.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+                copyPadlockArr.length >= 1 && copyPadlockArr.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+                break;
+            case '2':
+                copyPadlockArr.length <= 0 && filteredPadlockArr.sort((a, b) => new Date(a.updatedAt) - new Date(b.updatedAt));
+                copyPadlockArr.length >= 1 && copyPadlockArr.sort((a, b) => new Date(a.updatedAt) - new Date(b.updatedAt));
+                break;
+            default: 
+            copyPadlockArr.length <= 0 && filteredPadlockArr.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+            copyPadlockArr.length >= 1 && copyPadlockArr.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+                return;
+        }
+        await renderPadlocks();
+    }
+});

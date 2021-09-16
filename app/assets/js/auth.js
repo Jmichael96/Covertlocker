@@ -1,3 +1,4 @@
+
 // switch form to register when button is clicked
 document.getElementById('switchToRegisterBtn').onclick = () => {
     document.getElementById('loginWrap').style.display = 'none';
@@ -38,10 +39,14 @@ document.getElementById('loginForm').onsubmit = async (e) => {
     }).then((res) => res.json())
         .then(async (data) => {
             localStorage.setItem('token', data.token);
-            await renderAlert(data.serverMsg, false);
-            setTimeout(() => {
-                window.location.href = '/account';
-            }, 2000);
+            if (data.status === 401) {
+                renderAlert(data.serverMsg, true);
+                return;
+            }
+            window.location.href = '/account';
+            // await renderAlert(data.serverMsg, false);
+            // setTimeout(() => {
+            // }, 2000);
         }).catch(async (err) => {
             await renderAlert(err.response.data.serverMsg, true);
         });
@@ -73,10 +78,6 @@ document.getElementById('registerForm').onsubmit = async (e) => {
         answer
     };
 
-    // let headers = new Headers();
-    // headers.append('Content-Type', 'application/json');
-    // headers.append('x-auth-token', localStorage.token);
-
     await fetch(`/api/auth/register`, {
         method: 'POST',
         headers: headers,
@@ -94,23 +95,32 @@ document.getElementById('registerForm').onsubmit = async (e) => {
         });
 };
 
-// const renderAlert = async (msg, isErr) => {
-//     const alert = document.getElementById('formAlert');
-//     const iconWrap = document.getElementById('alertIconWrap');
-//     // message section to display whats inside the alert
-//     const message = document.getElementById('alertText');
-//     alert.style.display = 'block';
-//     message.innerHTML = msg;
+// if user selects the forgot password button
+document.getElementById('forgotPassBtn').addEventListener('click', () => { openModal(null) })
 
-//     // if there is no error and is for a successful message 
-//     if (!isErr) {
-//         iconWrap.innerHTML = '<i class="fa fa-check"></i>';
-//     } else if (isErr) {
-//         // if the alert is for errors
-//         iconWrap.innerHTML = '<i class="fas fa-times"></i>';
-//     }
+// when user submits forgot password with their email
+document.getElementById('submitForgotPassword').addEventListener('click', async (e) => {
+    e.preventDefault();
+    let email = $('#forgotPassEmail').val().trim();
 
-//     setTimeout(() => {
-//         alert.style.display = 'none';
-//     }, 5000);
-// };
+    let formData = {
+        subject: 'Forgot Password',
+    };
+
+    await fetch(`/api/auth/forgot_password/${email}`, {
+        method: 'PUT',
+        headers: headers,
+        body: JSON.stringify(formData)
+    }).then((res) => res.json())
+        .then(async (data) => {
+            if (data.status === 404) {
+                await renderAlert(data.serverMsg, true);
+                return;
+            }
+            closeModal();
+            await renderAlert(data.serverMsg, false);
+        }).catch(async (err) => {
+            await renderAlert(err.serverMsg, true);
+            throw err;
+        });
+});

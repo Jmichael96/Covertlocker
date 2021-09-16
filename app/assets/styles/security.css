@@ -1,0 +1,20 @@
+/* wrapper around the form element */
+
+#formWrap {
+    border-radius: 6px;
+    width: 100%;
+    max-width: 35rem;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+/* form */
+
+#securityForm {
+    padding: 1rem;
+}
