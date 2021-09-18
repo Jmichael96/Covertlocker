@@ -33,4 +33,8 @@ router.get('/reset_password', (req, res, next) => {
     res.sendFile(path.join(__dirname, '../app/reset_password.html'));
 });
 
+router.get('/dev_contact', (req, res, next) => {
+    res.sendFile(path.join(__dirname, '../app/dev_contact.html'));
+});
+
 module.exports = router;

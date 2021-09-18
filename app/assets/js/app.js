@@ -32,7 +32,7 @@ window.addEventListener('load', async () => {
             });
             break;
         case '/padlock':
-            privateRoute(foundUser)
+            privateRoute(foundUser);
             // logout button
             document.getElementById('logoutBtn').onclick = async () => {
                 await handleLogout();
@@ -47,7 +47,7 @@ window.addEventListener('load', async () => {
             });
             break;
         case '/create':
-            privateRoute(foundUser)
+            privateRoute(foundUser);
             // when the user hits the cancel button in the modal
             document.getElementById('cancelConfirmBtn').addEventListener('click', () => {
                 closeModal();
@@ -58,7 +58,7 @@ window.addEventListener('load', async () => {
             };
             break;
         case '/account':
-            privateRoute(foundUser)
+            privateRoute(foundUser);
             let loginRoute = "/" + /[^/]*$/.exec(document.referrer)[0];
             if (loginRoute === '/') {
                 renderAlert(`Howdy, ${foundUser.name}`, false);
@@ -72,7 +72,16 @@ window.addEventListener('load', async () => {
 
             break;
         case '/password':
-            privateRoute(foundUser)
+            privateRoute(foundUser);
+            break;
+        case '/dev_contact':
+            privateRoute(foundUser);
+            break;  
+        case '/update':
+            privateRoute(foundUser);
+            break;
+        case '/security':
+            privateRoute(foundUser);
             break;
         default: return;
     }
