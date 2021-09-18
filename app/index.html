@@ -38,17 +38,43 @@
         <form id="registerForm" class="form">
             <input id="registerName" placeholder="Your name" name="name" type="text" class="input" />
             <input id="registerEmail" name="email" placeholder="your@email.com" type="email" class="input" />
-            <input id="registerPassword" name="password" placeholder="Password" type="password" class="input" />
-            <input id="registerPasswordCheck" name="passwordCheck" placeholder="Re-type password" type="password"
-                class="input" />
             <select id="registerQuestion" name="question" class="input">
                 <option selected>Select a security question</option>
                 <option value="What is the name of your first pet?">What is the name of your first pet?</option>
                 <option value="Where did you graduate highschool?">Where did you graduate highschool?</option>
                 <option value="Where did you meet your spouse?">Where did you meet your spouse?</option>
                 <option value="What is your mothers maiden name?">What is your mothers maiden name?</option>
+                <option value="What is your favorite book?">What is your favorite book?</option>
+                <option value="What was the first company you worked for?">What was the first company you worked for?
+                </option>
+                <option value="What is your favorite food?">What is your favorite food?</option>
+                <option value="What is your favorite state?">What is your favorite state?</option>
             </select>
             <input id="registerAnswer" name="answer" placeholder="Security answer" type="text" class="input" />
+            <input id="registerPassword" name="password" placeholder="Password" type="password" class="input" />
+            <input id="registerPasswordCheck" name="passwordCheck" placeholder="Re-type password" type="password"
+                class="input" />
+            <p id="passwordMsg">Your password must contain at least the following</p>
+            <div class="form-group">
+                <input disabled type="checkbox" id="characterCheck">
+                <label for="characterCheck">6 Characters</label>
+            </div>
+            <div class="form-group">
+                <input disabled type="checkbox" id="lowercaseCheck">
+                <label for="lowercaseCheck">1 Lowercase</label>
+            </div>
+            <div class="form-group">
+                <input disabled type="checkbox" id="uppercaseCheck">
+                <label for="uppercaseCheck">1 Uppercase</label>
+            </div>
+            <div class="form-group">
+                <input disabled type="checkbox" id="numberCheck">
+                <label for="numberCheck">1 Number</label>
+            </div>
+            <div class="form-group">
+                <input disabled type="checkbox" id="specialCheck">
+                <label for="specialCheck">1 Special Character </label>
+            </div>
             <main class="wrapper" style="justify-content: flex-end;">
                 <button type="submit" class="btn">Submit</button>
             </main>
@@ -65,7 +91,8 @@
         <!-- <button class="modal-close-btn" id="close-btn"><i class="fa fa-times" title="閉じる"></i></button> -->
         <p id="modalText">Enter your email address</p>
         <main class="wrapper" style="margin: 1rem 0;">
-            <input placeholder="your@email.com" name="forgotPassEmail" type="email" class="input" id="forgotPassEmail" />
+            <input placeholder="your@email.com" name="forgotPassEmail" type="email" class="input"
+                id="forgotPassEmail" />
         </main>
         <main class="wrapper" style="justify-content: space-between;">
             <button id="cancelConfirmBtn" class="btn" type="button">Cancel</button>

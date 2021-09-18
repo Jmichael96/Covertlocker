@@ -13,9 +13,9 @@ exports.createMessage = async (req, res, next) => {
     });
 
     await newMessage.save().then(async (message) => {
-        let formattedMsg = "Hello how are you?" 
+        let msgArr = [`Covertlocker - ${message.messageType}\n\n`, `I'm ${message.name},\n\n`, `${message.message}\n\n`];
 
-        vonage('18773818296', process.env.MY_PHONE, formattedMsg);
+        vonage('18773818296', process.env.MY_PHONE, msgArr.join(' '));
         res.status(201).json({
             serverMsg: `Thank you, ${message.name}. Your feedback has been received`,
         });

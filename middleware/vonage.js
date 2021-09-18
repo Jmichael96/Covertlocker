@@ -5,7 +5,6 @@ const vonage = new Vonage({
     apiSecret: process.env.VONAGE_API_SECRET
 });
 
-
 const sendMessage = async (from, to, text) => {
     // const from = "18773818296"
     // const to = "18323349639"

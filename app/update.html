@@ -34,7 +34,17 @@
             </a>
         </div>
     </nav>
-
+    <div id="smOpenNav" class="navOverlay">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="overlay-content">
+            <a href="/account" class="mobileNavLink js-link" onclick="closeNav();">ACCOUNT</a>
+            <a href="/create" class="mobileNavLink js-link" onclick="closeNav();">CREATE</a>
+            <a href="/padlock" class="mobileNavLink js-link" onclick="closeNav();">LOCKER</a>
+            <a href="#!" id="logoutBtn"  class="mobileNavLink js-link" onclick="handleLogout();">LOGOUT</a>
+            <img class="mobileOverlayLogo" src="../assets/images/undercover.jpeg" alt="logo" />
+        </div>
+    </div>
+    
     <article id="updateRoot" class="pageRoot">
        
     </article>

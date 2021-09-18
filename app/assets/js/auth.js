@@ -124,3 +124,8 @@ document.getElementById('submitForgotPassword').addEventListener('click', async 
             throw err;
         });
 });
+
+// function to check password requirement boxes upon users engagement
+const handleCheckboxes = () => {
+    
+};

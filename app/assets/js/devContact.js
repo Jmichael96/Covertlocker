@@ -33,9 +33,15 @@ document.getElementById('devForm').addEventListener('submit', async (e) => {
         body: JSON.stringify(formData)
     }).then((res) => res.json())
     .then(async (data) => {
+        resetForm();
         await renderAlert(data.serverMsg, false);
     }).catch(async (err) => {
         await renderAlert(err.serverMsg, true);
         throw err;
     });
 });
+
+const resetForm = () => {
+    $('#messageType').val('');
+    $('#message').val('');
+};

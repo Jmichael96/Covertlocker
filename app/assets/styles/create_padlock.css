@@ -2,7 +2,7 @@
 
 #createFormWrap {
     position: fixed;
-    width: 100%;
+    width: 90%;
     max-width: 35rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, .3);
     top: 50%;
