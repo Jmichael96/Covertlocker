@@ -26,7 +26,7 @@ document.getElementById('loginForm').onsubmit = async (e) => {
         email,
         password
     };
-
+    console.log(formData);
     await fetch(`/api/auth/login`, {
         method: 'POST',
         headers: headers,

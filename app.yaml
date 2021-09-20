@@ -1,4 +1,11 @@
 runtime: nodejs14
 
-includes: 
-  - env_vars.yaml
+env_variables:
+  MONGODB_URI_DEV: "mongodb+srv://jvh_covertlocker_1996:y7oePHQiD5It2Ypi@develop.umufc.mongodb.net/dev"
+  MONGODB_URI_PROD: "mongodb+srv://jvh_covertlocker_1996:y7oePHQiD5It2Ypi@develop.umufc.mongodb.net/prod"
+  SECRET: "Jackattack96!_jvh_Dahmer96_!mySecretBitches"
+  GMAIL: "jeffreyvh196@gmail.com"
+  GMAIL_PASSWORD: "yidftprqhaismiav"
+  VONAGE_API_SECRET: "N5TjfN0VUEtJt22v"
+  VONAGE_API_KEY: "9d7faafc"
+  MY_PHONE: "18323349639"
