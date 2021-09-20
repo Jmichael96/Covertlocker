@@ -38,7 +38,8 @@ document.getElementById('loginForm').onsubmit = async (e) => {
                 renderAlert(data.serverMsg, true);
                 return;
             }
-            window.location.href = '/account';
+            // window.location.href = '/account';
+            console.log(data)
         }).catch(async (err) => {
             console.log(err);
             await renderAlert(err.serverMsg, true);

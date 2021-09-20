@@ -14,6 +14,7 @@ window.addEventListener('load', async () => {
                 // if (window.location.pathname !== '/') {
                 //     window.location.href = '/';
                 // }
+                renderAlert(data.serverMsg, true);
                 foundUser = null;
                 return;
             }
@@ -22,6 +23,7 @@ window.addEventListener('load', async () => {
         }).catch((err) => {
             window.location.href = '/';
             console.log(err);
+            renderAlert(err.serverMsg, true);
         });
 
     switch (window.location.pathname) {
