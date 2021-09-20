@@ -41,7 +41,7 @@ document.getElementById('loginForm').onsubmit = async (e) => {
             window.location.href = '/account';
         }).catch(async (err) => {
             console.log(err);
-            await renderAlert(err.response.data.serverMsg, true);
+            await renderAlert(err.serverMsg, true);
         });
 };
 
@@ -84,7 +84,7 @@ document.getElementById('registerForm').onsubmit = async (e) => {
                 window.location.href = '/account';
             }, 2000);
         }).catch(async (err) => {
-            await renderAlert(err.response.data.serverMsg, true);
+            await renderAlert(err.serverMsg, true);
         });
 };
 
