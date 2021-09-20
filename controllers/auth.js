@@ -112,7 +112,7 @@ exports.login = async (req, res, next) => {
         }).catch((err) => {
             console.log(err);
             res.status(500).json({
-                serverMsg: 'Please try again later'
+                serverMsg: 'There was a problem with the server. Please try again later.'
             });
         });
 };

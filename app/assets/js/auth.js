@@ -32,12 +32,12 @@ document.getElementById('loginForm').onsubmit = async (e) => {
         body: JSON.stringify(formData)
     }).then((res) => res.json())
         .then(async (data) => {
-            console.log('logged in');
-            localStorage.setItem('token', data.token);
             if (data.status === 401) {
                 renderAlert(data.serverMsg, true);
                 return;
             }
+            console.log('logged in');
+            localStorage.setItem('token', data.token);
             // window.location.href = '/account';
             console.log(data)
         }).catch(async (err) => {

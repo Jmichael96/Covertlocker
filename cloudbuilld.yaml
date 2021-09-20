@@ -1,0 +1,19 @@
+steps:
+- name: node:14.16.1
+  entrypoint: yarn
+  args: ["install"]
+- name: node:14.16.1
+  entrypoint: yarn
+  args: ["run", "create-env"]
+  env:
+    - 'MONGODB_URI_DEV=${_MONGODB_URI_DEV}'
+    - 'MONGODB_URI_PROD=${_MONGODB_URI_PROD}'
+    - 'SECRET=${_SECRET}'
+    - 'GMAIL=${_GMAIL}'
+    - 'GMAIL_PASSWORD=${_GMAIL_PASSWORD}'
+    - 'VONAGE_API_SECRET=${_VONAGE_API_SECRET}'
+    - 'VONAGE_API_KEY=${_VONAGE_API_KEY}'
+    - 'MY_PHONE=${_MY_PHONE}'
+- name: "gcr.io/cloud-builders/gcloud"
+  args: ["app", "deploy"]
+timeout: "1600s"
