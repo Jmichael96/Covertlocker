@@ -11,15 +11,10 @@ window.addEventListener('load', async () => {
     }).then((res) => res.json())
         .then((data) => {
             if (data.status === 401 || data.status === 404) {
-                // if (window.location.pathname !== '/') {
-                //     window.location.href = '/';
-                // }
-                renderAlert(data.serverMsg, true);
                 foundUser = null;
                 return;
             }
             foundUser = data;
-            console.log(foundUser);
         }).catch((err) => {
             window.location.href = '/';
             console.log(err);
@@ -60,7 +55,7 @@ window.addEventListener('load', async () => {
             };
             break;
         case '/account':
-            // privateRoute(foundUser);
+            privateRoute(foundUser);
             let loginRoute = "/" + /[^/]*$/.exec(document.referrer)[0];
             if (loginRoute === '/') {
                 renderAlert(`Howdy, ${foundUser.name}`, false);

@@ -25,7 +25,6 @@ document.getElementById('loginForm').onsubmit = async (e) => {
         email,
         password
     };
-    console.log(formData);
     await fetch(`/api/auth/login`, {
         method: 'POST',
         headers: headers,
@@ -38,10 +37,9 @@ document.getElementById('loginForm').onsubmit = async (e) => {
             }
             console.log('logged in');
             localStorage.setItem('token', data.token);
-            // window.location.href = '/account';
+            window.location.href = '/account';
             console.log(data)
         }).catch(async (err) => {
-            console.log(err);
             await renderAlert(err.serverMsg, true);
         });
 };
