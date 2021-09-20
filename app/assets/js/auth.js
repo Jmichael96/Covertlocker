@@ -1,4 +1,4 @@
-
+console.log('auth file loaded');
 // switch form to register when button is clicked
 document.getElementById('switchToRegisterBtn').onclick = () => {
     document.getElementById('loginWrap').style.display = 'none';
@@ -27,10 +27,6 @@ document.getElementById('loginForm').onsubmit = async (e) => {
         password
     };
 
-    // let headers = new Headers();
-    // headers.append('Content-Type', 'application/json');
-    // headers.append('x-auth-token', localStorage.token);
-
     await fetch(`/api/auth/login`, {
         method: 'POST',
         headers: headers,
@@ -38,6 +34,7 @@ document.getElementById('loginForm').onsubmit = async (e) => {
         body: JSON.stringify(formData)
     }).then((res) => res.json())
         .then(async (data) => {
+            console.log('logged in');
             localStorage.setItem('token', data.token);
             if (data.status === 401) {
                 renderAlert(data.serverMsg, true);
@@ -48,6 +45,7 @@ document.getElementById('loginForm').onsubmit = async (e) => {
             // setTimeout(() => {
             // }, 2000);
         }).catch(async (err) => {
+            console.log(err);
             await renderAlert(err.response.data.serverMsg, true);
         });
 };
@@ -127,5 +125,5 @@ document.getElementById('submitForgotPassword').addEventListener('click', async 
 
 // function to check password requirement boxes upon users engagement
 const handleCheckboxes = () => {
-    
+
 };
