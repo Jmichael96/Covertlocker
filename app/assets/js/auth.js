@@ -1,4 +1,3 @@
-console.log('auth file loaded');
 // switch form to register when button is clicked
 document.getElementById('switchToRegisterBtn').onclick = () => {
     document.getElementById('loginWrap').style.display = 'none';
@@ -30,7 +29,6 @@ document.getElementById('loginForm').onsubmit = async (e) => {
     await fetch(`/api/auth/login`, {
         method: 'POST',
         headers: headers,
-        mode: 'cors',
         body: JSON.stringify(formData)
     }).then((res) => res.json())
         .then(async (data) => {
@@ -41,9 +39,6 @@ document.getElementById('loginForm').onsubmit = async (e) => {
                 return;
             }
             window.location.href = '/account';
-            // await renderAlert(data.serverMsg, false);
-            // setTimeout(() => {
-            // }, 2000);
         }).catch(async (err) => {
             console.log(err);
             await renderAlert(err.response.data.serverMsg, true);
