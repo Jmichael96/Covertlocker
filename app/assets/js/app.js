@@ -58,7 +58,7 @@ window.addEventListener('load', async () => {
             };
             break;
         case '/account':
-            privateRoute(foundUser);
+            // privateRoute(foundUser);
             let loginRoute = "/" + /[^/]*$/.exec(document.referrer)[0];
             if (loginRoute === '/') {
                 renderAlert(`Howdy, ${foundUser.name}`, false);
