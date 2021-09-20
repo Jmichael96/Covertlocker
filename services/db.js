@@ -4,7 +4,7 @@ const developmentDB = process.env.MONGODB_URI_DEV;
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(developmentDB, {
+        await mongoose.connect(productionDB, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });  
