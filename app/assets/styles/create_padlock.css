@@ -1,3 +1,9 @@
+/* root element for page */
+
+#createRoot {
+    display: none;
+}
+
 /* wrapper around the form */
 
 #createFormWrap {

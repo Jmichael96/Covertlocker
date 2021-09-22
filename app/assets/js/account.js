@@ -4,14 +4,17 @@ const editEmailBtn = document.getElementById('editEmailBtn');
 const submitEmailBtn = document.getElementById('submitEmailBtn');
 const nameInput = document.getElementById('name');
 const emailInput = document.getElementById('email');
+const root = document.getElementById('accountRoot');
 
 setReadyListener();
+
 // watches for the found user variable to change with user data
 function setReadyListener() {
     const readyListener = async () => {
         if (foundUser) {
             removeLoader();
             assignInputValues();
+            root.style.display = 'block '
             return;
         }
         return setTimeout(readyListener, 250);
@@ -121,11 +124,11 @@ document.getElementById('submitEmailBtn').addEventListener('click', async (e) =>
 // when the user clicks to change the security question and answer
 document.getElementById('changeSecurityBtn').addEventListener('click', async (e) => {
     e.preventDefault();
+    renderSpinner('changeSecurityBtn');
+
     let formData = {
         subject: 'Change Covertlocker security question',
-        html: `
-            <a href="http://localhost:8080/security" target"_blank">Click here to change your security question</a>
-        `
+        type: 'security'
     };
 
     await fetch(`/api/auth/init_change_security/${foundUser.email}`, {
@@ -134,8 +137,10 @@ document.getElementById('changeSecurityBtn').addEventListener('click', async (e)
         body: JSON.stringify(formData)
     }).then((res) => res.json())
     .then(async (data) => {
+        removeSpinner('changeSecurityBtn', 'Change Security Question/Answer')
         await renderAlert(data.serverMsg, false);
     }).catch(async (err) => {
+        removeSpinner('changeSecurityBtn', 'Change Security Question/Answer')
         await renderAlert(err.serverMsg, true);
         throw err;
     });
@@ -144,11 +149,10 @@ document.getElementById('changeSecurityBtn').addEventListener('click', async (e)
 // when user clicks to change password
 document.getElementById('changePasswordBtn').addEventListener('click', async (e) => {
     e.preventDefault();
+    renderSpinner('changePasswordBtn');
     let formData = {
         subject: 'Covertlocker change password',
-        html: `
-            <a href="http://localhost:8080/password" target"_blank">Click here to change your password</a>
-        `
+        type: 'password'
     };
 
     await fetch(`/api/auth/init_change_password/${foundUser.email}`, {
@@ -157,8 +161,10 @@ document.getElementById('changePasswordBtn').addEventListener('click', async (e)
         body: JSON.stringify(formData)
     }).then((res) => res.json())
     .then(async (data) => {
+        removeSpinner('changePasswordBtn', 'Change Password')
         await renderAlert(data.serverMsg, false);
     }).catch(async (err) => {
+        removeSpinner('changePasswordBtn', 'Change Password')
         await renderAlert(err.serverMsg, true);
         throw err;
     });

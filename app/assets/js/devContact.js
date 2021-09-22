@@ -26,16 +26,20 @@ document.getElementById('devForm').addEventListener('submit', async (e) => {
         messageType: messageType,
         message: message
     };
-    console.log(formData);
+
+    renderSpinner('submitBtn');
+    
     await fetch(`/api/message/create`, {
         method: 'POST',
         headers: headers,
         body: JSON.stringify(formData)
     }).then((res) => res.json())
     .then(async (data) => {
+        removeSpinner('submitBtn', 'Submit');
         resetForm();
         await renderAlert(data.serverMsg, false);
     }).catch(async (err) => {
+        removeSpinner('submitBtn', 'Submit');
         await renderAlert(err.serverMsg, true);
         throw err;
     });

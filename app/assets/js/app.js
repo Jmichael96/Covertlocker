@@ -202,3 +202,13 @@ const privateRoute = (user) => {
         window.location.href = '/';
     }
 };
+
+// render spinner for submit forms and such
+const renderSpinner = (elId) => {
+    document.getElementById(elId).innerHTML = '<div id="spinner" class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>';
+};
+
+// remove the spinner
+const removeSpinner = (elId, html) => {
+    document.getElementById(elId).innerHTML = html;
+}

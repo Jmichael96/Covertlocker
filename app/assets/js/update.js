@@ -4,6 +4,21 @@ let url,
     padlock;
 const updateRoot = document.getElementById('updateRoot');
 
+setReadyListener();
+
+// watches for the found user variable to change with user data
+function setReadyListener() {
+    const readyListener = async () => {
+        if (foundUser) {
+            await fetchFolders();
+            updateRoot.style.display = 'block'
+            return;
+        }
+        return setTimeout(readyListener, 250);
+    };
+    readyListener();
+};
+
 window.addEventListener('load', async () => {
     url = new URL(window.location.href)
     id = url.searchParams.get('data');
@@ -56,7 +71,7 @@ const renderPadlock = async (data) => {
                 <textarea id="notes" name="notes" class="input" cols="30" rows="10">${data.notes}</textarea>
             </div>
             <main class="wrapper" style="justify-content: flex-end;">
-                <button type="submit" class="btn">Submit</button>
+                <button id="submitBtn" type="submit" class="btn">Submit</button>
             </main>
         </form>
     `
@@ -108,7 +123,7 @@ const initiateFormEventListener = async () => {
             await renderAlert('You haven\'t made any changes to save.', true);
             return;
         }
-
+        renderSpinner('submitBtn');
         let formData = {
             title,
             username,
@@ -123,6 +138,7 @@ const initiateFormEventListener = async () => {
             body: JSON.stringify(formData)
         }).then((res) => res.json())
             .then(async (data) => {
+                removeSpinner('submitBtn', 'Submit');
                 if (data.status === 404) {
                     await renderAlert(data.serverMsg, true);
                     return;
@@ -130,6 +146,7 @@ const initiateFormEventListener = async () => {
                 await renderAlert(data.serverMsg, false);
                 // setTimeout(() => {window.location.href = '/padlock';}, 2000)
             }).catch(async (err) => {
+                removeSpinner('submitBtn', 'Submit');
                 await renderAlert(err.serverMsg, true);
                 throw err;
             });

@@ -1,8 +1,20 @@
 let folderArr = [];
-// removeLoader();
-window.addEventListener('load', async () => {
-    await fetchFolders();
-});
+const root = document.getElementById('createRoot');
+
+setReadyListener();
+
+// watches for the found user variable to change with user data
+function setReadyListener() {
+    const readyListener = async () => {
+        if (foundUser) {
+            await fetchFolders();
+            root.style.display = 'block'
+            return;
+        }
+        return setTimeout(readyListener, 250);
+    };
+    readyListener();
+};
 
 document.getElementById('createForm').onsubmit = async (e) => {
     e.preventDefault();
@@ -17,6 +29,7 @@ document.getElementById('createForm').onsubmit = async (e) => {
         await renderAlert('Please enter the required fields', true);
         return
     }
+    renderSpinner('submitBtn');
     // ! THIS ISN'T BEING CREATED FOR SOME REASON
     if (!folder) {
         await createFolder('Default');
@@ -36,8 +49,10 @@ document.getElementById('createForm').onsubmit = async (e) => {
         body: JSON.stringify(formData)
     }).then((res) => res.json())
         .then((data) => {
+            removeSpinner('submitBtn', 'Submit');
             console.log(data);
         }).catch(async (err) => {
+            removeSpinner('submitBtn', 'Submit');
             await renderAlert(err.serverMsg, true);
         });
 };
@@ -56,7 +71,7 @@ const fetchFolders = async () => {
             }
             folderArr = data;
             await renderFolderOptions();
-            removeLoader()
+            removeLoader();
         }).catch(async (err) => {
             await renderAlert(err.serverMsg, true);
         });
@@ -78,7 +93,6 @@ const createFolder = async (defaultFolderName) => {
         folderName: !folderName ? defaultFolderName : folderName
     };
 
-    console.log(formData);
     await fetch(`/api/folder/create`, {
         method: 'POST',
         headers: headers,

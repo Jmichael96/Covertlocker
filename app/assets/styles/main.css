@@ -26,6 +26,11 @@ html {
     -moz-transition: .4s all ease;
     -o-transition: .4s all ease;
     transition: .4s all ease;
+    width: 6.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn:hover {

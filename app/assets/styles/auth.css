@@ -46,7 +46,7 @@
 .formTitle {
     font-size: 1.6rem;
     color: white;
-    margin: 0;
+    margin: 1rem 0 0 0;
     padding: 0;
     text-align: center;
 }
@@ -134,4 +134,10 @@
     border: solid #00c3ff;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
+}
+
+/* terms and conditions text under submit button */
+#termsConditionText {
+    color: rgb(129, 129, 129);
+    font-size: .8rem;
 }

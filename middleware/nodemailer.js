@@ -17,6 +17,7 @@ const smtpConfig = {
 const transporter = nodemailer.createTransport(smtpConfig);
 
 module.exports = sendMail = async (req, res, next) => {
+    let html = ``;
 
     const foundUser = await User.findOne({ email: req.params.email });
 
@@ -26,13 +27,26 @@ module.exports = sendMail = async (req, res, next) => {
             serverMsg: 'Could not find user with this email address.'
         });
     }
+    console.log(req.body.type);
+    if (req.body.type === 'password') {
+        html = `
+        <img style="width: 200px;" src="https://covertlocker.monster/assets/images/undercover.jpeg" />
+        <a style="text-align: center; font-size: 1rem; font-weight: 500;" href="http://localhost:8080/password?user_email=${req.params.email}&id=${foundUser._id}" target="_blank">Click here to reset your password</a>`
+    }
+
+    if (req.body.type === 'security') {
+        html = `
+            <img style="width: 200px;" src="https://covertlocker.monster/assets/images/undercover.jpeg" />
+            <a style="text-align: center; font-size: 1rem; font-weight: 500;" href="http://localhost:8080/security?user_email=${req.params.email}&id=${foundUser._id}" target="_blank">Click here to change your security question</a>
+        `
+    }
 
     let mailOptions = {
-        from: GMAIL,
+        from: `Consultation ${GMAIL}`,
         bcc: req.params.email,
         subject: req.body.subject,
-        html: !req.body.html ? `<a href="http://localhost:8080/reset_password?user_email=${req.params.email}" target="_blank">Click here to reset password</a>`: req.body.html,
-    }
+        html: html
+    };
 
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {

@@ -1,3 +1,10 @@
+// checkbox inputs
+const characterCheck = document.getElementById('characterCheck');
+const lowercaseCheck = document.getElementById('lowercaseCheck');
+const uppercaseCheck = document.getElementById('uppercaseCheck');
+const numCheck = document.getElementById('numberCheck');
+const specialCheck = document.getElementById('specialCheck');
+
 // switch form to register when button is clicked
 document.getElementById('switchToRegisterBtn').onclick = () => {
     document.getElementById('loginWrap').style.display = 'none';
@@ -20,7 +27,7 @@ document.getElementById('loginForm').onsubmit = async (e) => {
         await renderAlert('Please enter both your email and password', true);
         return;
     }
-
+    renderSpinner('submitLoginBtn');
     let formData = {
         email,
         password
@@ -31,6 +38,7 @@ document.getElementById('loginForm').onsubmit = async (e) => {
         body: JSON.stringify(formData)
     }).then((res) => res.json())
         .then(async (data) => {
+            removeSpinner('submitLoginBtn', 'Submit');
             if (data.status === 401) {
                 renderAlert(data.serverMsg, true);
                 return;
@@ -40,6 +48,7 @@ document.getElementById('loginForm').onsubmit = async (e) => {
             window.location.href = '/account';
             console.log(data)
         }).catch(async (err) => {
+            removeSpinner('submitLoginBtn', 'Submit');
             await renderAlert(err.serverMsg, true);
         });
 };
@@ -62,6 +71,10 @@ document.getElementById('registerForm').onsubmit = async (e) => {
         return;
     }
 
+    if (!characterCheck.checked || !lowercaseCheck.checked || !uppercaseCheck.checked || !numCheck.checked || !specialCheck.checked) {
+        await renderAlert('Your password doesn\'t meet the minimum requirements', true);
+        return;
+    }
     let formData = {
         name,
         email,
@@ -88,7 +101,7 @@ document.getElementById('registerForm').onsubmit = async (e) => {
 };
 
 // if user selects the forgot password button
-document.getElementById('forgotPassBtn').addEventListener('click', () => { openModal(null) })
+document.getElementById('forgotPassBtn').addEventListener('click', () => { openModal(null) });
 
 // when user submits forgot password with their email
 document.getElementById('submitForgotPassword').addEventListener('click', async (e) => {
@@ -117,7 +130,40 @@ document.getElementById('submitForgotPassword').addEventListener('click', async 
         });
 });
 
-// function to check password requirement boxes upon users engagement
-const handleCheckboxes = () => {
+// on change event for password
+document.getElementById('registerPassword').addEventListener('keyup', async function (e) {
+    handleCheckboxes(this.value)
+});
 
+// function to check password requirement boxes upon users engagement
+const handleCheckboxes = (passVal) => {
+    if (passVal.length <= 5) {
+        characterCheck.checked = false;
+    } else if (passVal.length >= 6) {
+        characterCheck.checked = true;
+    }
+
+    if (!/[a-z]/.test(passVal)) {
+        lowercaseCheck.checked = false;
+    } else if (/[a-z]/.test(passVal)) {
+        lowercaseCheck.checked = true;
+    }
+
+    if (!/[A-Z]/.test(passVal)) {
+        uppercaseCheck.checked = false;
+    } else if (/[A-Z]/.test(passVal)) {
+        uppercaseCheck.checked = true;
+    }
+
+    if (!/[0-9]/.test(passVal)) {
+        numCheck.checked = false;
+    } else if (/[0-9]/.test(passVal)) {
+        numCheck.checked = true;
+    }
+
+    if (!/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(passVal)) {
+        specialCheck.checked = false;
+    } else if (/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(passVal)) {
+        specialCheck.checked = true;
+    }
 };

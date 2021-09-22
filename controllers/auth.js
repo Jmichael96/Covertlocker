@@ -74,47 +74,80 @@ exports.login = async (req, res, next) => {
             serverMsg: 'Please enter the required information'
         });
     }
-    let fetchedUser;
+    // let fetchedUser;
 
-    User.findOne({ email: req.body.email })
-        .then(async (user) => {
-            if (!user) {
-                return res.status(404).json({
-                    serverMsg: 'User not found'
-                });
-            }
-            fetchedUser = user;
-            return bcrypt.compare(req.body.password, user.password);
-        }).then(async (result) => {
-            console.log(result)
-            if (!result) {
-                return res.status(401).json({
-                    status: 401,
-                    serverMsg: 'Invalid username or password'
-                });
-            }
-            const payload = {
-                user: {
-                    _id: fetchedUser._id,
-                    name: fetchedUser.name,
-                    email: fetchedUser.email,
-                    security: fetchedUser.security
-                }
-            };
-            await jwt.sign(payload, process.env.SECRET, { expiresIn: 3600 }, (err, token) => {
-                if (err) throw err;
-
-                return res.status(201).json({
-                    serverMsg: `Howdy, ${fetchedUser.name}`,
-                    token
-                });
-            });
-        }).catch((err) => {
-            console.log(err);
-            res.status(500).json({
-                serverMsg: 'There was a problem with the server. Please try again later.'
-            });
+    let user = await User.findOne({ email: req.body.email });
+    if (!user) {
+        return res.status(404).json({
+            serverMsg: 'User not found'
         });
+    }
+    let passwordValidated = await bcrypt.compare(req.body.password, user.password);
+
+    if (!passwordValidated) {
+        return res.status(401).json({
+            status: 401,
+            serverMsg: 'Invalid username or password'
+        });
+    }
+    const payload = {
+        user: {
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            security: user.security
+        }
+    };
+    jwt.sign(payload, process.env.SECRET, { expiresIn: 3600 }, (err, token) => {
+        if (err) {
+            return res.status(500).json({
+                serverMsg: 'There was a problem completing this request'
+            });
+        }
+
+        return res.status(201).json({
+            serverMsg: `Howdy, ${user.name}`,
+            token
+        });
+    });
+    // User.findOne({ email: req.body.email })
+    //     .then(async (user) => {
+    //         if (!user) {
+    //             return res.status(404).json({
+    //                 serverMsg: 'User not found'
+    //             });
+    //         }
+    //         fetchedUser = user;
+    //         return bcrypt.compare(req.body.password, user.password);
+    //     }).then(async (result) => {
+    //         if (!result) {
+    //             return res.status(401).json({
+    //                 status: 401,
+    //                 serverMsg: 'Invalid username or password'
+    //             });
+    //         }
+    //         const payload = {
+    //             user: {
+    //                 _id: fetchedUser._id,
+    //                 name: fetchedUser.name,
+    //                 email: fetchedUser.email,
+    //                 security: fetchedUser.security
+    //             }
+    //         };
+    //         jwt.sign(payload, process.env.SECRET, { expiresIn: 3600 }, (err, token) => {
+    //             if (err) throw err;
+
+    //             return res.status(201).json({
+    //                 serverMsg: `Howdy, ${fetchedUser.name}`,
+    //                 token
+    //             });
+    //         });
+    //     }).catch((err) => {
+    //         console.log(err);
+    //         res.status(500).json({
+    //             serverMsg: 'There was a problem with the server. Please try again later.'
+    //         });
+    //     });
 };
 
 //! @route    GET api/auth/load_user
@@ -265,9 +298,9 @@ exports.updateEmail = async (req, res, next) => {
     });
 };
 
-//! @route    PUT api/auth/change_security/:id
+//! @route    PUT api/auth/change_security/:email/:id
 //! @desc     Change the users security questions
-//! @access   Private
+//! @access   Public
 exports.changeSecurity = async (req, res, next) => {
     if (req.params.id !== req.user._id) {
         return res.status(401).json({
@@ -284,7 +317,7 @@ exports.changeSecurity = async (req, res, next) => {
     };
 
     User.findOneAndUpdate(
-        { _id: req.params.id },
+        { _id: req.params.id, email: req.params.email },
         { $set: newSecurity },
         { new: true, upsert: true }
     ).then((user) => {
@@ -306,55 +339,10 @@ exports.changeSecurity = async (req, res, next) => {
     });
 };
 
-//! @route    PUT api/auth/change_password/:id
+//! @route    PUT api/auth/change_password/:email/:id
 //! @desc     Change the users password
-//! @access   Private
-exports.changePassword = async (req, res, next) => {
-    if (req.params.id !== req.user._id) {
-        return res.status(401).json({
-            status: 401,
-            serverMsg: 'You are not authorized'
-        });
-    }
-    await bcrypt.hash(req.body.password, 15).then(async (hash) => {
-
-        const newPassword = {
-            password: hash
-        };
-
-        User.findOneAndUpdate(
-            { _id: req.params.id },
-            { $set: newPassword },
-            { new: true, upsert: true }
-        ).then((user) => {
-            if (!user) {
-                return res.status(404).json({
-                    status: 404,
-                    serverMsg: 'Could not find the user you were looking for'
-                });
-            }
-            return res.status(200).json({
-                serverMsg: 'Updated your password successfully.',
-                user
-            });
-        }).catch((err) => {
-            console.log(err);
-            res.status(500).json({
-                serverMsg: 'There was a problem completing this request. Please try again later'
-            });
-        });
-    }).catch((err) => {
-        console.log(err);
-        res.status(500).json({
-            serverMsg: 'Please try again later'
-        });
-    });
-};
-
-//! @route    PUT api/auth/reset_password/:email
-//! @desc     Resets the user password 
 //! @access   Public
-exports.resetPassword = async (req, res, next) => {
+exports.changePassword = async (req, res, next) => {
     await bcrypt.hash(req.body.password, 15).then(async (hash) => {
 
         const newPassword = {
@@ -362,7 +350,7 @@ exports.resetPassword = async (req, res, next) => {
         };
 
         User.findOneAndUpdate(
-            { email: req.params.email },
+            { _id: req.params.id, email: req.params.email },
             { $set: newPassword },
             { new: true, upsert: true }
         ).then((user) => {

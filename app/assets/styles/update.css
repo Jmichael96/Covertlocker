@@ -1,5 +1,11 @@
+/* root element for page */
+
+#updateRoot {
+    display: none;
+}
 
 /* update form element */
+
 .updateForm {
     position: fixed;
     width: 100%;

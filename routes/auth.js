@@ -40,32 +40,28 @@ router.put('/update_email/:id', checkAuth, AuthController.updateEmail);
 
 //! @route    POST api/auth/init_change_security/:email
 //! @desc     Initiate change users security questions by emailing confirmation to user
-//! @access   Private
-router.post('/init_change_security/:email', checkAuth, nodemail);
+//! @access   Public
+router.post('/init_change_security/:email', nodemail);
 
-//! @route    PUT api/auth/change_security/:id
+//! @route    PUT api/auth/change_security/:email/:id
 //! @desc     Change the users security questions
-//! @access   Private
-router.put('/change_security/:id', checkAuth, AuthController.changeSecurity);
+//! @access   Public
+router.put('/change_security/:email/:id', AuthController.changeSecurity);
 
 //! @route    POST api/auth/init_change_security/:email
 //! @desc     Initiate change users security questions by emailing confirmation to user
-//! @access   Private
-router.post('/init_change_password/:email', checkAuth, nodemail);
+//! @access   Public
+router.post('/init_change_password/:email', nodemail);
 
-//! @route    PUT api/auth/change_password/:id
+//! @route    PUT api/auth/change_password/:email/:id
 //! @desc     Change the users password
-//! @access   Private
-router.put('/change_password/:id', checkAuth, AuthController.changePassword);
+//! @access   Public
+router.put('/change_password/:email/:id', AuthController.changePassword);
 
 //! @route    PUT api/auth/forgot_password/:email
 //! @desc     Change the users password
-//! @access   Private
+//! @access   Public
 router.put('/forgot_password/:email', nodemail);
 
-//! @route    PUT api/auth/reset_password/:email
-//! @desc     Resets the user password 
-//! @access   Public
-router.put('/reset_password/:email', AuthController.resetPassword);
 
 module.exports = router;

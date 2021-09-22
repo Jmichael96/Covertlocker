@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="../assets/styles/auth.css" />
     <link rel="stylesheet" href="../assets/styles/alert.css" />
     <link rel="stylesheet" href="../assets/styles/modal.css" />
-
+    <link rel="stylesheet" href="../assets/styles/spinner.css" />
+    
 </head>
 
 <body>
@@ -21,7 +22,10 @@
             <input id="loginEmail" name="email" placeholder="your@email.com" type="email" class="input" />
             <input id="loginPassword" name="password" placeholder="Password1234" type="password" class="input" />
             <main class="wrapper" style="justify-content: flex-end;">
-                <button type="submit" class="btn">Submit</button>
+                <button id="submitLoginBtn" type="submit" class="btn">
+                    Submit
+                    
+                </button>
             </main>
         </form>
         <main class="wrapper">
@@ -54,7 +58,7 @@
             <input id="registerPassword" name="password" placeholder="Password" type="password" class="input" />
             <input id="registerPasswordCheck" name="passwordCheck" placeholder="Re-type password" type="password"
                 class="input" />
-            <p id="passwordMsg">Your password must contain at least the following</p>
+            <p id="passwordMsg">Your password must contain at least the following:</p>
             <div class="form-group">
                 <input disabled type="checkbox" id="characterCheck">
                 <label for="characterCheck">6 Characters</label>
@@ -79,6 +83,9 @@
                 <button type="submit" class="btn">Submit</button>
             </main>
         </form>
+        <main class="wrapper">
+            <p id="termsConditionText">Upon submission, you agree to the terms & conditions.</p>
+        </main>
         <main class="wrapper">
             <p class="switchAuthTextWrap">Already have an account? <a href="#!" id="switchToLoginBtn"
                     class="switchAuthTypeBtn">Login</a></p>

@@ -1,3 +1,11 @@
+let id, email;
+
+window.addEventListener('load', () => {
+    url = new URL(window.location.href)
+    email = url.searchParams.get('user_email');
+    id = url.searchParams.get('id');
+});
+
 document.getElementById('securityForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     let answer = $('#answer').val();
@@ -10,7 +18,7 @@ document.getElementById('securityForm').addEventListener('submit', async (e) => 
         }
     };
 
-    await fetch(`/api/auth/change_security/${foundUser._id}`, {
+    await fetch(`/api/auth/change_security/${email}/${id}`, {
         method: 'PUT',
         headers: headers,
         body: JSON.stringify(formData)
@@ -21,7 +29,6 @@ document.getElementById('securityForm').addEventListener('submit', async (e) => 
             return;
         }
         await renderAlert(data.serverMsg, false);
-        setTimeout(() => { window.location.href = '/account' }, 2000)
     }).catch(async (err) => {
         await renderAlert(err.serverMsg, true);
         throw err;

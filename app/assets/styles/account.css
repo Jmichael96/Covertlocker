@@ -1,3 +1,9 @@
+/* root element of the page */
+
+#accountRoot {
+    display: none;
+}
+
 /* card that contains all the profile data */
 
 #accountCard {
@@ -84,4 +90,21 @@
 #membersDate {
     color: white;
     text-align: center;
+}
+
+/* change security question button */
+
+#changeSecurityBtn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* change password button */
+#changePasswordBtn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
