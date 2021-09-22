@@ -31,13 +31,13 @@ module.exports = sendMail = async (req, res, next) => {
     if (req.body.type === 'password') {
         html = `
         <img style="width: 200px;" src="https://covertlocker.monster/assets/images/undercover.jpeg" />
-        <a style="text-align: center; font-size: 1rem; font-weight: 500;" href="http://localhost:8080/password?user_email=${req.params.email}&id=${foundUser._id}" target="_blank">Click here to reset your password</a>`
+        <a style="text-align: center; font-size: 1rem; font-weight: 500;" href="https://covertlocker.monster/password?user_email=${req.params.email}&id=${foundUser._id}" target="_blank">Click here to reset your password</a>`
     }
 
     if (req.body.type === 'security') {
         html = `
             <img style="width: 200px;" src="https://covertlocker.monster/assets/images/undercover.jpeg" />
-            <a style="text-align: center; font-size: 1rem; font-weight: 500;" href="http://localhost:8080/security?user_email=${req.params.email}&id=${foundUser._id}" target="_blank">Click here to change your security question</a>
+            <a style="text-align: center; font-size: 1rem; font-weight: 500;" href="https://covertlocker.monster/security?user_email=${req.params.email}&id=${foundUser._id}" target="_blank">Click here to change your security question</a>
         `
     }
 
