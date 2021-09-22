@@ -1,6 +1,10 @@
 let folderArr = [];
 const root = document.getElementById('createRoot');
 
+window.addEventListener('load', () => {
+    // document.getElementById('createOuterFormWrap').style.minHeight = window.innerHeight + 'px';
+});
+
 setReadyListener();
 
 // watches for the found user variable to change with user data

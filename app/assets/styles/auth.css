@@ -1,14 +1,7 @@
 /* login wrapper */
 
 #loginWrap {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    width: 100%;
+    width: 90%;
     max-width: 30rem;
     background-color: #004b6e;
     border-radius: 6px;
@@ -20,19 +13,14 @@
 /* register wrapper */
 
 #registerWrap {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    width: 100%;
+    width: 90%;
     max-width: 30rem;
     background-color: #004b6e;
     border-radius: 6px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, .4);
     display: none;
+    padding: 1rem 0;
+    margin: 2rem 0;
 }
 
 /* form elements */
@@ -137,12 +125,14 @@
 }
 
 /* terms and conditions text under submit button */
+
 #termsConditionText {
     color: rgb(129, 129, 129);
     font-size: .8rem;
 }
 
 /* forgot password text */
+
 #forgotPassBtn {
     color: #00c3ff;
     text-decoration: none;

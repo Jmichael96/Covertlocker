@@ -5,6 +5,11 @@ const uppercaseCheck = document.getElementById('uppercaseCheck');
 const numCheck = document.getElementById('numberCheck');
 const specialCheck = document.getElementById('specialCheck');
 
+window.addEventListener('load', () => {
+    document.getElementById('indexOuterRoot').style.minHeight = window.innerHeight +'px';
+
+});
+
 // switch form to register when button is clicked
 document.getElementById('switchToRegisterBtn').onclick = () => {
     document.getElementById('loginWrap').style.display = 'none';

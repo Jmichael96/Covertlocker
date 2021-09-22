@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="A fully secure web app that stores all your passwords and login info into a fully encrypted format" />
+    <meta name="description"
+        content="A fully secure web app that stores all your passwords and login info into a fully encrypted format" />
     <meta name="author" content="Jeffrey VanHorn" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,14 +16,16 @@
 
     <!-- Schema.org markup for Google+ -->
     <meta itemprop="name" content="Jeffrey VanHorn">
-    <meta itemprop="description" content="A fully secure web app that stores all your passwords and login info into a fully encrypted format">
+    <meta itemprop="description"
+        content="A fully secure web app that stores all your passwords and login info into a fully encrypted format">
     <meta itemprop="image" content="../assets/images/undercover.jpeg">
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="https://covertlocker.monster">
     <meta name="twitter:title" content="Jeffrey VanHorn">
-    <meta name="twitter:description" content="A fully secure web app that stores all your passwords and login info into a fully encrypted format">
+    <meta name="twitter:description"
+        content="A fully secure web app that stores all your passwords and login info into a fully encrypted format">
     <meta name="twitter:creator" content="Jeffrey VanHorn">
 
     <!-- Twitter summary card with large image must be at least 280x150px -->
@@ -32,7 +35,8 @@
     <meta property="og:type" content="web app" />
     <meta property="og:url" content="https://covertlocker.monster" />
     <meta property="og:image" content="../assets/undercover.jpeg" />
-    <meta property="og:description" content="A fully secure web app that stores all your passwords and login info into a fully encrypted format" />
+    <meta property="og:description"
+        content="A fully secure web app that stores all your passwords and login info into a fully encrypted format" />
     <meta property="og:site_name" content="Covertlocker" />
     <!-- favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/images/undercover.jpeg" />
@@ -72,44 +76,46 @@
         <div class="overlay-content">
             <a href="/account" class="mobileNavLink js-link" onclick="closeNav();">ACCOUNT</a>
             <a href="/padlock" class="mobileNavLink js-link" onclick="closeNav();">LOCKER</a>
-            <a href="#!" id="logoutBtn"  class="mobileNavLink js-link" onclick="handleLogout();">LOGOUT</a>
+            <a href="#!" id="logoutBtn" class="mobileNavLink js-link" onclick="handleLogout();">LOGOUT</a>
             <img class="mobileOverlayLogo" src="../assets/images/undercover.jpeg" alt="logo" />
         </div>
     </div>
 
     <article id="createRoot" class="pageRoot">
-        <section id="createFormWrap">
-            <form id="createForm">
-                <div class="inputWrap">
-                    <label class="label">Folder</label>
-                    <main class="wrapper">
-                        <select name="folder"
-                            style="width:90%; border-bottom-right-radius: 0; height: 1.9rem; border-top-right-radius: 0;"
-                            class="input" id="folder"></select>
-                        <button type="button" id="createFolderBtn">+</button>
+        <main id="createOuterFormWrap" class="wrapper">
+            <section id="createFormWrap" class="large-shadow dark-blue">
+                <form id="createForm">
+                    <div class="inputWrap">
+                        <label class="label">Folder</label>
+                        <main class="wrapper">
+                            <select name="folder"
+                                style="width:90%; border-bottom-right-radius: 0; height: 1.9rem; border-top-right-radius: 0;"
+                                class="input" id="folder"></select>
+                            <button type="button" id="createFolderBtn">+</button>
+                        </main>
+                    </div>
+                    <div class="inputWrap">
+                        <label class="label">Title *</label>
+                        <input id="title" placeholder="Title" name="title" class="input" />
+                    </div>
+                    <div class="inputWrap">
+                        <label class="label">Username *</label>
+                        <input id="username" placeholder="Username or email" name="username" class="input" />
+                    </div>
+                    <div class="inputWrap">
+                        <label class="label">Password *</label>
+                        <input id="password" placeholder="Password" name="password" class="input" />
+                    </div>
+                    <div class="inputWrap">
+                        <label class="label">Notes</label>
+                        <textarea id="notes" name="notes" id="" class="input" cols="30" rows="10"></textarea>
+                    </div>
+                    <main class="wrapper" style="justify-content: flex-end;">
+                        <button id="submitBtn" type="submit" class="btn">Submit</button>
                     </main>
-                </div>
-                <div class="inputWrap">
-                    <label class="label">Title *</label>
-                    <input id="title" placeholder="Title" name="title" class="input" />
-                </div>
-                <div class="inputWrap">
-                    <label class="label">Username *</label>
-                    <input id="username" placeholder="Username or email" name="username" class="input" />
-                </div>
-                <div class="inputWrap">
-                    <label class="label">Password *</label>
-                    <input id="password" placeholder="Password" name="password" class="input" />
-                </div>
-                <div class="inputWrap">
-                    <label class="label">Notes</label>
-                    <textarea id="notes" name="notes" id="" class="input" cols="30" rows="10"></textarea>
-                </div>
-                <main class="wrapper" style="justify-content: flex-end;">
-                    <button id="submitBtn" type="submit" class="btn">Submit</button>
-                </main>
-            </form>
-        </section>
+                </form>
+            </section>
+        </main>
     </article>
 
     <!-- ! MODAL  -->

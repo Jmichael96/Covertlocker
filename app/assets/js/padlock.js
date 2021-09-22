@@ -76,7 +76,6 @@ function setReadyListener() {
             }
             await fetchFolders();
             await fetchPadlocks();
-            document.getElementById('lockImg').style.display = 'none';
             return;
         }
         return setTimeout(readyListener, 250);
@@ -168,36 +167,37 @@ const renderPadlocks = async (folderName) => {
     }
     padlockContainer.innerHTML = `${Object.values(copyPadlockArr.length <= 0 ? filteredPadlockArr : copyPadlockArr).map((padlock) => {
         return `
-                <div class="padlockCard card">
-                    <div class="padlockHead">
-                        <main class="wrapper" style="justify-content: space-between;">
-                        <h2 class="padlockTitle">${padlock.title}</h2>
-                        <p class="padlockLastUsedDate">${padlock.updatedAt ? moment(padlock.updatedAt).format('L LT') : moment(padlock.createdAt).format('L LT')}</p>
-                        </main>
+                <main class="wrapper">
+                    <div style="width: 90%;" class="padlockCard card large-shadow dark-blue">
+                        <div class="padlockHead">
+                            <main class="wrapper" style="justify-content: space-between;">
+                            <h2 class="padlockTitle">${padlock.title}</h2>
+                            <p class="padlockLastUsedDate">${padlock.updatedAt ? moment(padlock.updatedAt).format('L LT') : moment(padlock.createdAt).format('L LT')}</p>
+                            </main>
+                        </div>
+                        <p class="padlockUsernameWrap">Username: 
+                            <div class="padlockInputCopyWrap">
+                                <input class="padlockInput" disabled value="${padlock.username}" />
+                                <button name="${padlock.username}" class="copyBtn">Copy</button>
+                            </div>
+                        </p>
+                        <p class="padlockPasswordWrap">Password: 
+                            <div class="padlockInputCopyWrap">
+                                <input  type="password" class="padlockInput" disabled value="${padlock.password}" />
+                                <button name="${padlock.password}" class="copyBtn">Copy</button>
+                            </div>
+                        </p>
+                        <textarea rows="4" disabled value="${padlock.notes}" class="padlockNotes">${padlock.notes}</textarea>
+                        <main class="wrapper" style="justify-content: space-between">
+                            <div value="${padlock._id}" class="padlockIconWrap padlockDeleteWrap">
+                                <i class="fas fa-trash padlockIcon"></i>
+                            </div>
+                            <div value="${padlock._id}" class="padlockIconWrap padlockUpdateWrap">
+                                <i class="fas fa-keyboard padlockIcon"></i>
+                            </div>
+                        </main>    
                     </div>
-                    <p class="padlockUsernameWrap">Username: 
-                        <div class="padlockInputCopyWrap">
-                            <input class="padlockInput" disabled value="${padlock.username}" />
-                            <button name="${padlock.username}" class="copyBtn">Copy</button>
-                        </div>
-                    </p>
-                    <p class="padlockPasswordWrap">Password: 
-                        <div class="padlockInputCopyWrap">
-                            <input  type="password" class="padlockInput" disabled value="${padlock.password}" />
-                            <button name="${padlock.password}" class="copyBtn">Copy</button>
-                        </div>
-                    </p>
-
-                    <textarea rows="4" disabled value="${padlock.notes}" class="padlockNotes">${padlock.notes}</textarea>
-                    <main class="wrapper" style="justify-content: space-between">
-                        <div value="${padlock._id}" class="padlockIconWrap padlockDeleteWrap">
-                            <i class="fas fa-trash padlockIcon"></i>
-                        </div>
-                        <div value="${padlock._id}" class="padlockIconWrap padlockUpdateWrap">
-                            <i class="fas fa-keyboard padlockIcon"></i>
-                        </div>
-                    </main>    
-                </div>
+                </main>
             `
     }).join('')
         }`
@@ -250,7 +250,7 @@ const renderPadlocks = async (folderName) => {
 const renderFolders = async () => {
     document.getElementById('folderContainer').innerHTML = `${Object.values(fetchedFolderArr).map((f) => {
         return `
-            <div value="null" name="${f.folderName}" class="folderCard card">
+            <div value="null" name="${f.folderName}" class="folderCard card dark-blue large-shadow">
                 <div value="delete" name="${f.folderName}" class="deleteFolderBtn"><i class="fas fa-trash folderTrashIcon"></i></div>
                 <main value="null" name="${f.folderName}" class="wrapper" style="justify-content: space-between;">    
                     <h2 class="folderTitle">${f.folderName}</h2>

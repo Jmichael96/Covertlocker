@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="A fully secure web app that stores all your passwords and login info into a fully encrypted format" />
+    <meta name="description"
+        content="A fully secure web app that stores all your passwords and login info into a fully encrypted format" />
     <meta name="author" content="Jeffrey VanHorn" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,14 +16,16 @@
 
     <!-- Schema.org markup for Google+ -->
     <meta itemprop="name" content="Jeffrey VanHorn">
-    <meta itemprop="description" content="A fully secure web app that stores all your passwords and login info into a fully encrypted format">
+    <meta itemprop="description"
+        content="A fully secure web app that stores all your passwords and login info into a fully encrypted format">
     <meta itemprop="image" content="../assets/images/undercover.jpeg">
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="https://covertlocker.monster">
     <meta name="twitter:title" content="Jeffrey VanHorn">
-    <meta name="twitter:description" content="A fully secure web app that stores all your passwords and login info into a fully encrypted format">
+    <meta name="twitter:description"
+        content="A fully secure web app that stores all your passwords and login info into a fully encrypted format">
     <meta name="twitter:creator" content="Jeffrey VanHorn">
 
     <!-- Twitter summary card with large image must be at least 280x150px -->
@@ -32,98 +35,103 @@
     <meta property="og:type" content="web app" />
     <meta property="og:url" content="https://covertlocker.monster" />
     <meta property="og:image" content="../assets/undercover.jpeg" />
-    <meta property="og:description" content="A fully secure web app that stores all your passwords and login info into a fully encrypted format" />
+    <meta property="og:description"
+        content="A fully secure web app that stores all your passwords and login info into a fully encrypted format" />
     <meta property="og:site_name" content="Covertlocker" />
     <!-- favicon -->
     <link rel="shortcut icon" type="image/png" href="../assets/images/undercover.jpeg" />
     <!-- Safari favicon -->
     <link rel="apple-touch-icon" href="../assets/images/undercover.jpeg">
-    
+
     <link rel="stylesheet" href="../assets/styles/main.css" />
     <link rel="stylesheet" href="../assets/styles/auth.css" />
     <link rel="stylesheet" href="../assets/styles/alert.css" />
     <link rel="stylesheet" href="../assets/styles/modal.css" />
     <link rel="stylesheet" href="../assets/styles/spinner.css" />
     <link rel="stylesheet" href="../assets/styles/footer.css" />
-    
+
 </head>
 
 <body>
-    <article id="loginWrap">
-        <h1 class="formTitle">Login</h1>
-        <form id="loginForm" class="form">
-            <input id="loginEmail" name="email" placeholder="your@email.com" type="email" class="input" />
-            <input id="loginPassword" name="password" placeholder="Password1234" type="password" class="input" />
-            <main class="wrapper" style="justify-content: flex-end;">
-                <button id="submitLoginBtn" type="submit" class="btn">
-                    Submit
-                    
-                </button>
-            </main>
-        </form>
-        <main class="wrapper">
-            <p class="switchAuthTextWrap">Don't have an account yet? <a href="#!" id="switchToRegisterBtn"
-                    class="switchAuthTypeBtn">Register</a></p>
-        </main>
-        <main class="wrapper">
-            <a id="forgotPassBtn" href="#!">Forgot password?</a>
-        </main>
-    </article>
+    <main id="indexOuterRoot" class="wrapper">
+        <article id="loginWrap">
+            <h1 class="formTitle">Login</h1>
+            <form id="loginForm" class="form">
+                <input id="loginEmail" name="email" placeholder="your@email.com" type="email" class="input" />
+                <input id="loginPassword" name="password" placeholder="Password1234" type="password" class="input" />
+                <main class="wrapper" style="justify-content: flex-end;">
+                    <button id="submitLoginBtn" type="submit" class="btn">
+                        Submit
 
-    <article id="registerWrap">
-        <h1 class="formTitle">Register</h1>
-        <form id="registerForm" class="form">
-            <input id="registerName" placeholder="Your name" name="name" type="text" class="input" />
-            <input id="registerEmail" name="email" placeholder="your@email.com" type="email" class="input" />
-            <select id="registerQuestion" name="question" class="input">
-                <option selected>Select a security question</option>
-                <option value="What is the name of your first pet?">What is the name of your first pet?</option>
-                <option value="Where did you graduate highschool?">Where did you graduate highschool?</option>
-                <option value="Where did you meet your spouse?">Where did you meet your spouse?</option>
-                <option value="What is your mothers maiden name?">What is your mothers maiden name?</option>
-                <option value="What is your favorite book?">What is your favorite book?</option>
-                <option value="What was the first company you worked for?">What was the first company you worked for?
-                </option>
-                <option value="What is your favorite food?">What is your favorite food?</option>
-                <option value="What is your favorite state?">What is your favorite state?</option>
-            </select>
-            <input id="registerAnswer" name="answer" placeholder="Security answer" type="text" class="input" />
-            <input id="registerPassword" name="password" placeholder="Password" type="password" class="input" />
-            <input id="registerPasswordCheck" name="passwordCheck" placeholder="Re-type password" type="password"
-                class="input" />
-            <p id="passwordMsg">Your password must contain at least the following:</p>
-            <div class="form-group">
-                <input disabled type="checkbox" id="characterCheck">
-                <label for="characterCheck">6 Characters</label>
-            </div>
-            <div class="form-group">
-                <input disabled type="checkbox" id="lowercaseCheck">
-                <label for="lowercaseCheck">1 Lowercase</label>
-            </div>
-            <div class="form-group">
-                <input disabled type="checkbox" id="uppercaseCheck">
-                <label for="uppercaseCheck">1 Uppercase</label>
-            </div>
-            <div class="form-group">
-                <input disabled type="checkbox" id="numberCheck">
-                <label for="numberCheck">1 Number</label>
-            </div>
-            <div class="form-group">
-                <input disabled type="checkbox" id="specialCheck">
-                <label for="specialCheck">1 Special Character </label>
-            </div>
-            <main class="wrapper" style="justify-content: flex-end;">
-                <button type="submit" class="btn">Submit</button>
+                    </button>
+                </main>
+            </form>
+            <main class="wrapper">
+                <p class="switchAuthTextWrap">Don't have an account yet? <a href="#!" id="switchToRegisterBtn"
+                        class="switchAuthTypeBtn">Register</a></p>
             </main>
-        </form>
-        <main class="wrapper">
-            <p id="termsConditionText">Upon submission, you agree to the terms & conditions.</p>
-        </main>
-        <main class="wrapper">
-            <p class="switchAuthTextWrap">Already have an account? <a href="#!" id="switchToLoginBtn"
-                    class="switchAuthTypeBtn">Login</a></p>
-        </main>
-    </article>
+            <main class="wrapper">
+                <a id="forgotPassBtn" href="#!">Forgot password?</a>
+            </main>
+        </article>
+
+        <article id="registerWrap">
+            <h1 class="formTitle">Register</h1>
+            <form id="registerForm" class="form">
+                <input id="registerName" placeholder="Your name" name="name" type="text" class="input" />
+                <input id="registerEmail" name="email" placeholder="your@email.com" type="email" class="input" />
+                <select id="registerQuestion" name="question" class="input">
+                    <option selected>Select a security question</option>
+                    <option value="What is the name of your first pet?">What is the name of your first pet?</option>
+                    <option value="Where did you graduate highschool?">Where did you graduate highschool?</option>
+                    <option value="Where did you meet your spouse?">Where did you meet your spouse?</option>
+                    <option value="What is your mothers maiden name?">What is your mothers maiden name?</option>
+                    <option value="What is your favorite book?">What is your favorite book?</option>
+                    <option value="What was the first company you worked for?">What was the first company you worked
+                        for?
+                    </option>
+                    <option value="What is your favorite food?">What is your favorite food?</option>
+                    <option value="What is your favorite state?">What is your favorite state?</option>
+                </select>
+                <input id="registerAnswer" name="answer" placeholder="Security answer" type="text" class="input" />
+                <input id="registerPassword" name="password" placeholder="Password" type="password" class="input" />
+                <input id="registerPasswordCheck" name="passwordCheck" placeholder="Re-type password" type="password"
+                    class="input" />
+                <p id="passwordMsg">Your password must contain at least the following:</p>
+                <div class="form-group">
+                    <input disabled type="checkbox" id="characterCheck">
+                    <label for="characterCheck">6 Characters</label>
+                </div>
+                <div class="form-group">
+                    <input disabled type="checkbox" id="lowercaseCheck">
+                    <label for="lowercaseCheck">1 Lowercase</label>
+                </div>
+                <div class="form-group">
+                    <input disabled type="checkbox" id="uppercaseCheck">
+                    <label for="uppercaseCheck">1 Uppercase</label>
+                </div>
+                <div class="form-group">
+                    <input disabled type="checkbox" id="numberCheck">
+                    <label for="numberCheck">1 Number</label>
+                </div>
+                <div class="form-group">
+                    <input disabled type="checkbox" id="specialCheck">
+                    <label for="specialCheck">1 Special Character </label>
+                </div>
+                <main class="wrapper" style="justify-content: flex-end;">
+                    <button type="submit" class="btn">Submit</button>
+                </main>
+            </form>
+            <main class="wrapper">
+                <p id="termsConditionText">Upon submission, you agree to the terms & conditions.</p>
+            </main>
+            <main class="wrapper">
+                <p class="switchAuthTextWrap">Already have an account? <a href="#!" id="switchToLoginBtn"
+                        class="switchAuthTypeBtn">Login</a></p>
+            </main>
+        </article>
+    </main>
+
 
     <!-- ! MODAL  -->
     <div class="overlay" id="overlay"></div>
@@ -146,7 +154,7 @@
         <p id="alertText"></p>
     </div>
 
-    <footer class="dark-blue fixed-footer">
+    <footer class="dark-blue">
         <p id="copyrightTextWrap"></p>
         <p id="buildByTextWrap">Built with <i class="fas fa-coffee"></i> by <a id="footerName"
                 href="https://codevh.com/" target="_blank">Jeffrey VanHorn</a></p>
