@@ -74,7 +74,7 @@
 /* button to click on and swtich the auth type */
 
 .switchAuthTypeBtn {
-    color: rgb(0, 140, 255);
+    color: #00c3ff;
     font-weight: 500;
     text-decoration: none;
 }
@@ -140,4 +140,10 @@
 #termsConditionText {
     color: rgb(129, 129, 129);
     font-size: .8rem;
+}
+
+/* forgot password text */
+#forgotPassBtn {
+    color: #00c3ff;
+    text-decoration: none;
 }

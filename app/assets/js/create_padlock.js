@@ -48,9 +48,10 @@ document.getElementById('createForm').onsubmit = async (e) => {
         mode: 'cors',
         body: JSON.stringify(formData)
     }).then((res) => res.json())
-        .then((data) => {
+        .then(async (data) => {
             removeSpinner('submitBtn', 'Submit');
-            console.log(data);
+            await renderAlert(data.serverMsg, false);
+            clearForm();
         }).catch(async (err) => {
             removeSpinner('submitBtn', 'Submit');
             await renderAlert(err.serverMsg, true);
@@ -118,4 +119,12 @@ document.getElementById('createFolderSubmit').onclick = async (e) => {
 
 document.getElementById('createFolderBtn').onclick = async () => {
     await openModal();
+};
+
+const clearForm = () => {
+    $('#title').val('');
+    $('#username').val('');
+    $('#password').val('');
+    $('#notes').val('');
+    $('#folder').val('');
 };

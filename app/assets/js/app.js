@@ -69,7 +69,6 @@ window.addEventListener('load', async () => {
 
             break;
         case '/password':
-            privateRoute(foundUser);
             break;
         case '/dev_contact':
             privateRoute(foundUser);
@@ -78,7 +77,6 @@ window.addEventListener('load', async () => {
             privateRoute(foundUser);
             break;
         case '/security':
-            privateRoute(foundUser);
             break;
         default: return;
     }

@@ -1,4 +1,10 @@
 let id, email;
+// checkbox inputs
+const characterCheck = document.getElementById('characterCheck');
+const lowercaseCheck = document.getElementById('lowercaseCheck');
+const uppercaseCheck = document.getElementById('uppercaseCheck');
+const numCheck = document.getElementById('numberCheck');
+const specialCheck = document.getElementById('specialCheck');
 
 window.addEventListener('load', () => {
     url = new URL(window.location.href)
@@ -19,7 +25,10 @@ document.getElementById('passwordForm').addEventListener('submit', async (e) => 
         await renderAlert('Your passwords do not match', true);
         return;
     }
-
+    if (!characterCheck.checked || !lowercaseCheck.checked || !uppercaseCheck.checked || !numCheck.checked || !specialCheck.checked) {
+        await renderAlert('Your password doesn\'t meet the minimum requirements', true);
+        return;
+    }
     let formData = {
         password
     };
@@ -40,3 +49,41 @@ document.getElementById('passwordForm').addEventListener('submit', async (e) => 
         throw err;
     });
 });
+
+// on change event for password
+document.getElementById('password').addEventListener('keyup', async function (e) {
+    handleCheckboxes(this.value)
+});
+
+// function to check password requirement boxes upon users engagement
+const handleCheckboxes = (passVal) => {
+    if (passVal.length <= 5) {
+        characterCheck.checked = false;
+    } else if (passVal.length >= 6) {
+        characterCheck.checked = true;
+    }
+
+    if (!/[a-z]/.test(passVal)) {
+        lowercaseCheck.checked = false;
+    } else if (/[a-z]/.test(passVal)) {
+        lowercaseCheck.checked = true;
+    }
+
+    if (!/[A-Z]/.test(passVal)) {
+        uppercaseCheck.checked = false;
+    } else if (/[A-Z]/.test(passVal)) {
+        uppercaseCheck.checked = true;
+    }
+
+    if (!/[0-9]/.test(passVal)) {
+        numCheck.checked = false;
+    } else if (/[0-9]/.test(passVal)) {
+        numCheck.checked = true;
+    }
+
+    if (!/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(passVal)) {
+        specialCheck.checked = false;
+    } else if (/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(passVal)) {
+        specialCheck.checked = true;
+    }
+};

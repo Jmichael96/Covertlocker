@@ -110,6 +110,7 @@ document.getElementById('submitForgotPassword').addEventListener('click', async 
 
     let formData = {
         subject: 'Forgot Password',
+        type: 'password'
     };
 
     await fetch(`/api/auth/forgot_password/${email}`, {
